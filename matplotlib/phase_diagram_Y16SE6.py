@@ -19,9 +19,12 @@ def plot_phase_diagram(ax, Y=16, SE=6, Cdense=894):
     C_SE, T = np.loadtxt(f'../simulations/mfold_SE{SE}_concentration.tsv', skiprows=1, usecols=[0,3], unpack=True)
     line, = ax.plot(C_SE / 1.5 / Cov, T, label=r'$T_\mathrm{SE}$')
     imax = np.where(4/3*C_SE > Cdense)[0][0]
+    TC = np.interp(Cdense, 4/3*C_SE, T)
+    CC = np.interp(TC, T, C_SE/1.5)
+    print(TC, CC)
     ax.plot(
-        np.concatenate([[Cdense] , (Cdense - (C_SE[:imax] / 1.5))]) / Cov, 
-        np.concatenate([[0], T[:imax]]), 
+        np.concatenate([[Cdense] , (Cdense - (C_SE[:imax] / 1.5)), [CC]]) / Cov, 
+        np.concatenate([[0], T[:imax], [TC]]), 
         '--', color=line.get_color()
     )
     
