@@ -1,0 +1,45 @@
+\documentclass[twocolumn,amsmath,amssymb,superscriptaddress]{revtex4-1}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,backgrounds, calc, positioning, topaths,chains, intersections, decorations.markings, shapes.geometric, matrix,patterns,mindmap,fit,lindenmayersystems}
+%\usetikzlibrary{positioning, patterns,topaths,chains,matrix}
+
+\usepackage{pgfplots}
+%\pgfplotsset{compat=1.9}
+\usepgfplotslibrary{groupplots}
+\usepackage{pgfplotstable}
+
+%iLM colors
+\definecolor{ilmcolor}{RGB}{103,33,128}
+\definecolor{ilmblue}{RGB}{98,196,221}
+\definecolor{ilmorange}{RGB}{255,116,40}
+\definecolor{ilmgray}{RGB}{153,153,153}
+
+%default colors in matplotlib v2.0
+\definecolor{plt0}{HTML}{1f77b4}
+\definecolor{plt1}{HTML}{ff7f0e}
+\definecolor{plt2}{HTML}{2ca02c}
+\definecolor{plt3}{HTML}{d62728}
+\definecolor{plt4}{HTML}{9467bd}
+\definecolor{plt5}{HTML}{8c564b}
+\definecolor{plt6}{HTML}{e377c2}
+\definecolor{plt7}{HTML}{7f7f7f}
+\definecolor{plt8}{HTML}{bcbd22}
+\definecolor{plt9}{HTML}{17becf}
+
+
+
+\usepackage[active,pdftex,tightpage]{preview}
+\PreviewEnvironment[]{tikzpicture}
+\PreviewEnvironment[]{pgfpicture}
+\begin{document}
+
+
+\newcommand{\shadederr}[4]{%
+    \addplot[name path=upper,draw=none] table[x=#2, y expr=\thisrow{#3}+\thisrow{err_#3}]{#1};
+    \addplot[name path=lower,draw=none] table[x=#2, y expr=\thisrow{#3}-\thisrow{err_#3}]{#1};
+    \addplot[fill=#4!10] fill between[of=upper and lower];
+    \addplot[no marks, #4] table[x=#2, y=#3,]{#1};
+}
+<>
+\end{document}
