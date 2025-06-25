@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+Y16SE6-1mM-NP500nm-0.1pct_3739.nsz,,
+Measurement Results,,
+Date,2025”N3ŒŽ18“ú 13:12:15,
+Measurement Type,Particle Size,
+Sample Name,Y16SE6-1mM-NP500nm-0.1pct,
+Scattering Angle,90,
+Temperature of the Holder,48.0,°C
+Dispersion Medium Viscosity,0.569,mPa·s
+Transmission Intensity before Meas.,21245,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,334,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,0.22,
+Peak2 S.P.Area Ratio,0.78,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),1.7,nm
+Peak2 Size (Mean),23.4,nm
+Peak3 Size (Mean),---,nm
+Total Mean,18.6,nm
+Peak1 S. D.,0.2,nm
+Peak2 S. D.,2.8,nm
+Peak3 S. D.,---,nm
+Total S. D.,9.4,nm
+Peak1 Mode,1.7,nm
+Peak2 Mode,23.1,nm
+Peak3 Mode,---,nm
+Total Mode,23.1,nm
+Cumulant Operations,,
+Z-Average,2162.7,nm
+PI,2.686,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation g1(T),Fitting Function g1(T)
+1,0.974371,0.972151
+2,0.969507,0.967666
+3,0.964563,0.963151
+4,0.957771,0.957183
+5,0.948039,0.949205
+6,0.937285,0.93901
+7,0.923194,0.926157
+8,0.907179,0.910258
+9,0.888815,0.891365
+10,0.869708,0.870341
+11,0.850796,0.848795
+12,0.834144,0.828959
+13,0.82,0.813164
+14,0.809738,0.802799
+15,0.802229,0.797391
+16,0.796365,0.794966
+17,0.791808,0.793506
+18,0.787393,0.791903
+19,0.782995,0.78974
+20,0.778368,0.786766
+21,0.773332,0.78268
+22,0.767948,0.777075
+23,0.761647,0.769403
+24,0.754201,0.75894
+25,0.745223,0.74473
+26,0.733704,0.725554
+27,0.71841,0.699896
+28,0.699635,0.665965
+29,0.67683,0
+30,0.647847,0
+31,0.608397,0
+32,0.559783,0
+33,0.496577,0
+34,0.411511,0
+35,0.28557,0
+36,0.01,0
+
+
