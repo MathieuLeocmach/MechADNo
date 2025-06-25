@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+Y16SE6-1mM-NP500nm-0.1pct-properprotocol2-cooling2_3048.nsz,,
+Measurement Results,,
+Date,2025”N2ŒŽ27“ú 15:57:45,
+Measurement Type,Particle Size,
+Sample Name,Y16SE6-1mM-NP500nm-0.1pct-properprotocol2-cooling2,
+Scattering Angle,90,
+Temperature of the Holder,60.9,°C
+Dispersion Medium Viscosity,0.464,mPa·s
+Transmission Intensity before Meas.,15327,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,1428,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,0.22,
+Peak2 S.P.Area Ratio,0.78,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),224.9,nm
+Peak2 Size (Mean),5683.8,nm
+Peak3 Size (Mean),---,nm
+Total Mean,4501.6,nm
+Peak1 S. D.,27.4,nm
+Peak2 S. D.,1050.5,nm
+Peak3 S. D.,---,nm
+Total S. D.,2433.2,nm
+Peak1 Mode,226.4,nm
+Peak2 Mode,6680.2,nm
+Peak3 Mode,---,nm
+Total Mode,6680.2,nm
+Cumulant Operations,,
+Z-Average,6612.1,nm
+PI,0.374,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation g1(T),Fitting Function g1(T)
+1,0.996684,0.996683
+1.4,0.995919,0.995945
+1.9,0.995042,0.995054
+2.6,0.993954,0.99386
+3.6,0.992254,0.992258
+5,0.990113,0.990201
+6.9,0.987719,0.987714
+9.5,0.984775,0.984785
+13.1,0.981509,0.981451
+18.1,0.977851,0.977842
+25,0.974161,0.974176
+34.5,0.970634,0.970643
+47.6,0.967335,0.967328
+65.7,0.964133,0.964172
+90.7,0.960952,0.960959
+125.2,0.957406,0.957385
+172.8,0.95319,0.95312
+238.5,0.947778,0.94779
+329.2,0.940839,0.940874
+454.4,0.931621,0.931673
+627.2,0.919296,0.919324
+865.7,0.902804,0.9028
+1194.9,0.880998,0.880866
+1649.3,0.852224,0.852052
+2276.5,0.814458,0.814676
+3142.2,0.766689,0.766965
+4337.1,0.707362,0.70735
+5986.4,0.63511,0.635063
+8262.9,0.552458,0.551004
+11405.1,0.45738,0.458568
+15742.2,0.361345,0.363795
+21728.6,0.277713,0.274144
+29991.5,0.194756,0.195876
+41396.6,0.133161,0.131686
+57138.8,0.142784,0
+78867.4,0.128956,0
+
+
