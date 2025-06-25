@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+Y16SE6-1mM-NP500nm-0.1pct-properprotocol2-cooling3_3225.nsz,,
+Measurement Results,,
+Date,2025”N2ŒŽ28“ú 2:32:49,
+Measurement Type,Particle Size,
+Sample Name,Y16SE6-1mM-NP500nm-0.1pct-properprotocol2-cooling3,
+Scattering Angle,90,
+Temperature of the Holder,61.0,°C
+Dispersion Medium Viscosity,0.464,mPa·s
+Transmission Intensity before Meas.,15670,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,2580,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,0.13,
+Peak2 S.P.Area Ratio,0.87,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),157.7,nm
+Peak2 Size (Mean),4020.1,nm
+Peak3 Size (Mean),---,nm
+Total Mean,3523.1,nm
+Peak1 S. D.,16.1,nm
+Peak2 S. D.,1439.1,nm
+Peak3 S. D.,---,nm
+Total S. D.,1864.7,nm
+Peak1 Mode,157.8,nm
+Peak2 Mode,3413.3,nm
+Peak3 Mode,---,nm
+Total Mode,3413.3,nm
+Cumulant Operations,,
+Z-Average,5329.4,nm
+PI,0.610,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation g1(T),Fitting Function g1(T)
+1,0.997078,0.997045
+1.4,0.996013,0.996042
+1.9,0.995008,0.995116
+2.6,0.994095,0.99393
+3.6,0.992294,0.992344
+5,0.990269,0.990307
+6.9,0.987896,0.987843
+9.5,0.984893,0.98494
+13.1,0.981677,0.981633
+18.1,0.978032,0.978047
+25,0.974344,0.97438
+34.5,0.970794,0.970794
+47.6,0.967351,0.967346
+65.7,0.964033,0.963974
+90.7,0.960535,0.960492
+125.2,0.956504,0.956553
+172.8,0.951578,0.951686
+238.5,0.945352,0.945381
+329.2,0.937176,0.937106
+454.4,0.926324,0.926223
+627.2,0.911941,0.911869
+865.7,0.89285,0.892884
+1194.9,0.867688,0.867822
+1649.3,0.834882,0.835053
+2276.5,0.792898,0.79296
+3142.2,0.740462,0.740254
+4337.1,0.677178,0.676484
+5986.4,0.602158,0.602689
+8262.9,0.521713,0.521914
+11405.1,0.439325,0.439027
+15742.2,0.356608,0.359283
+21728.6,0.289656,0.285963
+29991.5,0.245944,0
+41396.6,0.213216,0
+57138.8,0.167247,0
+78867.4,0.113576,0
+
+

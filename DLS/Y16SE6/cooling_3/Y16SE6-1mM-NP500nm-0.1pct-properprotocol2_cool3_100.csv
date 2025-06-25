@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+Y16SE6-1mM-NP500nm-0.1pct-properprotocol2-cooling3_3226.nsz,,
+Measurement Results,,
+Date,2025”N2ŒŽ28“ú 2:35:03,
+Measurement Type,Particle Size,
+Sample Name,Y16SE6-1mM-NP500nm-0.1pct-properprotocol2-cooling3,
+Scattering Angle,90,
+Temperature of the Holder,60.9,°C
+Dispersion Medium Viscosity,0.464,mPa·s
+Transmission Intensity before Meas.,15670,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,2277,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,1.00,
+Peak2 S.P.Area Ratio,---,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),3755.0,nm
+Peak2 Size (Mean),---,nm
+Peak3 Size (Mean),---,nm
+Total Mean,3755.0,nm
+Peak1 S. D.,1603.5,nm
+Peak2 S. D.,---,nm
+Peak3 S. D.,---,nm
+Total S. D.,1603.5,nm
+Peak1 Mode,3014.8,nm
+Peak2 Mode,---,nm
+Peak3 Mode,---,nm
+Total Mode,3014.8,nm
+Cumulant Operations,,
+Z-Average,4893.7,nm
+PI,0.499,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation g1(T),Fitting Function g1(T)
+1,0.996406,0.9965
+1.4,0.995559,0.995426
+1.9,0.994346,0.994283
+2.6,0.992782,0.992882
+3.6,0.991096,0.99109
+5,0.988808,0.988817
+6.9,0.985961,0.986058
+9.5,0.982832,0.982785
+13.1,0.979064,0.979035
+18.1,0.975052,0.974974
+25,0.97095,0.970882
+34.5,0.966991,0.966991
+47.6,0.963246,0.963346
+65.7,0.959548,0.959758
+90.7,0.955831,0.9559
+125.2,0.951597,0.951464
+172.8,0.94638,0.946147
+238.5,0.939667,0.939505
+329.2,0.930891,0.930851
+454.4,0.919141,0.919276
+627.2,0.903411,0.903693
+865.7,0.882512,0.882824
+1194.9,0.854963,0.855175
+1649.3,0.819317,0.819096
+2276.5,0.773803,0.772984
+3142.2,0.716458,0.715672
+4337.1,0.646636,0.647045
+5986.4,0.56791,0.568771
+8262.9,0.483828,0.484799
+11405.1,0.399661,0.400967
+15742.2,0.324851,0.323141
+21728.6,0.253379,0.254431
+29991.5,0.202795,0.193869
+41396.6,0.154971,0
+57138.8,0.122342,0
+78867.4,0.0762373,0
+
+
