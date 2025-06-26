@@ -1,0 +1,48 @@
+Data Series Information
+Name:			Y6-2-FS-1pct 1
+Sample:			text1
+Operator:			NoLogin
+Remarks:			text2
+Number of Intervals:			1
+Application:			RHEOPLUS/32 V3.21 21003769-33024
+Device:			MCR301 SN80371229; FW3.55; Slot5
+Measuring Date/Time:			7/9/2024; 5:17 PM
+Measuring System:			CP25-1-SN36127; d=0.047 mm
+Accessories:			TU1=P-PTD200-SN83201745
+
+Calculating Constants:
+- Csr [min/s]:			6.0590337
+- Css [Pa/mNm]:			244.53424
+- Start Delay Time [s]:			2.906
+- Substance Density [rho]:			1,000
+- Measurement Type:			0
+- Motor Correction Factor:			1
+
+Interval:			1
+Number of Data Points:			17
+
+Time Setting:			17 Meas. Pts.
+Measuring Profile:
+- Strain			Amplitude gamma = 1 %
+			Frequency f = 0.1 ... 40 Hz log; |Slope| = 6.1489743 Pt. / dec 
+  Temperature			T[-1] = 25 °C
+
+Meas. Pts.	Angular Frequency	Storage Modulus	Loss Modulus	Damping Factor	Temperature	Complex Viscosity	Torque	Status	Time
+	[rad/s]	[Pa]	[Pa]	[1]	[°C]	[Pa·s]	[mNm]	[]	[s]
+1	0.628	3.52	16.8	4.76	25	27.3	0.000696		60.8
+2	0.914	5.08	23.9	4.71	25	26.7	0.000994		78.6
+3	1.33	7.68	33.9	4.42	25	26.2	0.00142		104
+4	1.93	12.1	47.9	3.95	25	25.6	0.00202		121
+5	2.81	20.2	66.9	3.31	25	24.9	0.00286		134
+6	4.09	34.8	90.8	2.61	25	23.8	0.00398		143
+7	5.94	58.4	119	2.03	25	22.3	0.00543		151
+8	8.64	93.6	145	1.55	25	20	0.00707		158
+9	12.6	139	167	1.2	25	17.3	0.0089		166
+10	18.3	191	178	0.929	25	14.3	0.0107		172
+11	26.6	242	177	0.731	25	11.3	0.0122		180
+12	38.6	280	166	0.591	25	8.43	0.0133		187
+13	56.2	297	148	0.499	25	5.91	0.0136		194
+14	81.7	278	129	0.462	25	3.75	0.0125		202
+15	119	187	107	0.57	25	1.81	0.0088		208
+16	173	0	89	1E+30	25	0.515	0.00364	ME-,taD	215
+17	251	0	518	1E+30	25	2.06	0.0212	ME-,taD	220
