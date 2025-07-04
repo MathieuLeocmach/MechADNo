@@ -121,41 +121,24 @@ Dt = np.array([1.00000e+00, 1.40000e+00, 1.90000e+00, 2.60000e+00, 3.60000e+00,
        7.88674e+04])*1e-6  #s delay time vector
 
 
-os.chdir(r"C:\Users\ajiye\Documents\DLS\Y6")
+dirname = os.path.dirname(__file__)
+dirfile = os.path.join(dirname, 'Y6')
+os.chdir(dirfile)
 files = np.empty((180,4))
+coolings = []
+counts = []
 
-name = "cooling_1/Y16SE6-1mM-NP500nm-0.1pct-properprotocol2_cool1_{:03d}.csv"
-files = sort_files(name)
-cool1 = get_cooling(files)
-T1 = np.reshape(files[:,2],(36,5))
-c1 = np.reshape(files[:,3],(36,5))
+for i in range(1,6):
+    name = f"cooling_{i}/Y16SE6-1mM-NP500nm-0.1pct-properprotocol2_cool{i}_{{:03d}}.csv"
+    # name = f"cooling_{i}/Y16SE8-1mM-NP500nm-0.1pct-cooling{i}_{{:03d}}.csv"
+    # name = f"cooling_{i}/Y16SE4-1mM-NP500nm-0.1pct-cooling{i}_{{:03d}}.csv"
+    files = sort_files(name)
+    cool = get_cooling(files)
+    T = np.reshape(files[:,2],(36,5))
+    c = np.reshape(files[:,3],(36,5))
+    coolings.append(cool)
+    counts.append(c)
 
-name = "cooling_2/Y16SE6-1mM-NP500nm-0.1pct-properprotocol2_cool2_{:03d}.csv"
-files = sort_files(name)
-cool2 = get_cooling(files)
-T2 = np.reshape(files[:,2],(36,5))
-c2 = np.reshape(files[:,3],(36,5))
-
-name = "cooling_3/Y16SE6-1mM-NP500nm-0.1pct-properprotocol2_cool3_{:03d}.csv"
-files = sort_files(name)
-cool3 = get_cooling(files)
-T3 = np.reshape(files[:,2],(36,5))
-c3 = np.reshape(files[:,3],(36,5))
-
-name = "cooling_4/Y16SE6-1mM-NP500nm-0.1pct-properprotocol2_cool4_{:03d}.csv"
-files = sort_files(name)
-cool4 = get_cooling(files)
-T4 = np.reshape(files[:,2],(36,5))
-c4 = np.reshape(files[:,3],(36,5))
-
-name = "cooling_5/Y16SE6-1mM-NP500nm-0.1pct-properprotocol2_cool5_{:03d}.csv"
-files = sort_files(name)
-cool5 = get_cooling(files)
-T5 = np.reshape(files[:,2],(36,5))
-c5 = np.reshape(files[:,3],(36,5))
-
-coolings = [cool1, cool2, cool3, cool4, cool5]
-counts = [c1, c2, c3, c4, c5]
 labels = list(range(80,44,-1))
 
 #%% plot autocorrelation curves of two temperatures 
