@@ -15,7 +15,7 @@ from uncertainties import ufloat, unumpy
 import uncertainties
 
 plt.close('all')
-plt.style.use(r"C:\Users\ajiye\Documents\presentation.mplstyle")
+#plt.style.use(r"C:\Users\ajiye\Documents\presentation.mplstyle")
 colors = ["red","darkorange","gold","lawngreen","lightseagreen","blueviolet","indigo"][::-1]
 cmap = LinearSegmentedColormap.from_list("mycmap",colors)
 num = 37
@@ -33,37 +33,35 @@ def f2msd(f,q=23e6,d=3):
 def sort_files(filename):
     """sort files of cooling by measurement order"""
     files = np.empty((180,4))
-    for i in range(1,181):
-        file = filename.format(i)
-        files[i-1,0] = i
-        with open(file, encoding='shift_jis') as f:
+    for i in range(len(files)):
+        files[i,0] = i+1
+        with open(filename.format(i+1), encoding='shift_jis') as f:
             for line in f:
                 if ".nsz" in line:
                     match = re.search(r'_(\d+)\.nsz', line)
-                    files[i-1,1] = int(match.group(1))
+                    files[i,1] = int(match.group(1))
                 if "Temperature of the Holder" in line:
                     T = float(line.split(",")[1])
-                    files[i-1,2] = T
+                    files[i,2] = T
                 if "Count Rate" in line:
                     c = float(line.split(",")[1])
-                    files[i-1,3] = c
+                    files[i,3] = c
     return files[np.argsort(files[:, 1])]
 
-def get_g1(file):
+def get_g1(filename):
     """get autocorrelation function from file"""
-    with open(file, encoding='shift_jis') as f:
+    with open(filename, encoding='shift_jis') as f:
         for line in f:
             if "Correlation g1(T)" in line:
                 data = np.loadtxt(f, delimiter=",", skiprows=0)
     return data[:,1]
 
-def get_cooling(files):
+def get_cooling(files, pattern):
     """get all data of one cooling, 
     returns a matrix (36x5x36) corresponding to (T, repeat, g1)"""
     cool = np.zeros((36,5,36))
     for i,n in enumerate(files[::,0]):
-        file = name.format(int(n))
-        data = get_g1(file)
+        data = get_g1(pattern.format(int(n)))
         cool[i//5, i%5, :] = data
     return cool
 
@@ -122,8 +120,8 @@ Dt = np.array([1.00000e+00, 1.40000e+00, 1.90000e+00, 2.60000e+00, 3.60000e+00,
 
 
 dirname = os.path.dirname(__file__)
-dirfile = os.path.join(dirname, 'Y6')
-os.chdir(dirfile)
+dirfile = os.path.join(dirname, '../DLS/Y16SE6/')
+#os.chdir(dirfile)
 files = np.empty((180,4))
 coolings = []
 counts = []
@@ -132,8 +130,8 @@ for i in range(1,6):
     name = f"cooling_{i}/Y16SE6-1mM-NP500nm-0.1pct-properprotocol2_cool{i}_{{:03d}}.csv"
     # name = f"cooling_{i}/Y16SE8-1mM-NP500nm-0.1pct-cooling{i}_{{:03d}}.csv"
     # name = f"cooling_{i}/Y16SE4-1mM-NP500nm-0.1pct-cooling{i}_{{:03d}}.csv"
-    files = sort_files(name)
-    cool = get_cooling(files)
+    files = sort_files(os.path.join(dirfile, name))
+    cool = get_cooling(files, os.path.join(dirfile, name))
     T = np.reshape(files[:,2],(36,5))
     c = np.reshape(files[:,3],(36,5))
     coolings.append(cool)
@@ -243,7 +241,7 @@ ax4.legend()
 
 #%% fit JS and extract mechanical properties
 from scipy.interpolate import CubicSpline
-water = np.loadtxt('C:/Users/ajiye/Documents/DLS/water.tsv', skiprows=1)
+water = np.loadtxt(os.path.join(dirfile, '../water.tsv'), skiprows=1)
 eta_w = CubicSpline(water[:,0], water[:,1]*1e-3)
 
 fig5, ax5 = plt.subplots(3, 1, figsize=(4,8), sharex=True)
