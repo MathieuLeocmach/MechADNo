@@ -198,13 +198,14 @@ if __name__ == '__main__':
             #sigma = (err_plus_J + err_minus_J)[goodt]/J[goodt],
             bounds=(0, np.inf),
         )[0]
-        print(np.ptp((err_plus_J + err_minus_J)[goodt]/J[goodt]))
+        #print(np.ptp((err_plus_J + err_minus_J)[goodt]/J[goodt]))
         axs[1].plot(
             Dts[goodt], 
             jsJ(Dts[goodt], Gi, Gi*tau, eta_s), 
             color=line.get_color(),
             #label='JS fit'
         )
+        print(f'T={T}°C\tGi={Gi:.2f} Pa')
         
     axs[0].set_xscale('log')
     axs[0].set_yscale('log')
