@@ -4,17 +4,28 @@ from matplotlib.colors import LinearSegmentedColormap, Normalize
 import os, re
 from scipy import optimize, constants as const
 from scipy.optimize import curve_fit
+from scipy.interpolate import CubicSpline
 from uncertainties import ufloat, unumpy
 import uncertainties
 
 q = 23e6 #m-1
-a = 0.25e-6 #m
+a = 0.255e-6 #m
 π = np.pi
 
 #%%
 
 def f2msd(f,q=23e6,d=3):
     return -2*d/q**2 * np.log(f)
+    
+def f2J(f, T=20, q=23e6, a=0.255e-6, d=3):
+    """Converts g1(t|q) to a complience J(t) using generalized Stokes-Einstein. 
+    T in Celsius, wavenumber q in 1/m, radius a in m."""
+    return -2*d*np.pi*a/(q**2*const.Boltzmann * const.convert_temperature(T, 'C', 'K')) * np.log(f)
+    
+def J2msd(J, T=20, a=0.255e-6, d=3):
+    """Converts complience J(t) to msd(t) in m².
+    T in Celsius, radius a in m."""
+    return d*const.Boltzmann * const.convert_temperature(T, 'C', 'K') /(3*np.pi*a) * J
     
 def load_and_sort(pattern):
     """Load all measurements and sort them by measurement order"""
@@ -40,7 +51,33 @@ def load_and_sort(pattern):
         measurements[i] = (i+1, meas_ID, T, count, data[:,1])
     return measurements[np.argsort(measurements['meas_ID'])]
 
-
+def fit_Newtonian(Dt, J, eta_s=1e-3):
+    """Fits a Newtonian model to the compliance and returns the viscosity with uncertainty"""
+    popt, pcov = curve_fit(
+        lambda t, eta: np.log(t / eta),
+        Dt,
+        np.log(J),
+        p0 = eta_s,
+        bounds=[[0,], [np.inf,]]
+    )
+    return uncertainties.correlated_values(popt, pcov)
+    
+def jsJ(t, Gi, η, ηs):
+    '''Creep compliance of the Johnson-Segalman model'''
+    return t/(η+ηs) + 1/Gi * (η/(η+ηs))**2 * (1 - np.exp(-Gi*(1/η + 1/ηs)*t))
+    
+def fit_JS(Dt, J, eta_s, Gi=20, eta=1e-3):
+    """Fit to the compliance a Johnson Segalman model with a fixed solvent viscosity.
+    Returns the Maxwell modulus at infinite frequency and the Maxwell viscosity, with uncertainties."""
+    popt, pcov = curve_fit(
+        lambda t, Gi, eta: np.log(jsJ(t, Gi, eta, eta_s)),
+        Dt,
+        np.log(J),
+        p0 = [Gi, eta],
+        bounds=[[0,0], [np.inf, np.inf]]
+    )
+    return uncertainties.correlated_values(popt, pcov)
+    
 
 # delay time vector in s
 Dts = np.array([
@@ -57,11 +94,41 @@ Dts = np.array([
     
 if __name__ == '__main__':
     dirname = os.path.dirname(__file__)
+    
+    #load DLS data from Y16SE0 in buffer
+    NOSEpattern = os.path.join(dirname, '../DLS/Y16SE0/autocorr-gel6_{:02d}.csv')
+    measSE0 = np.zeros(70, dtype=[
+        ('file_ID', np.int64),
+        ('meas_ID', np.int64),
+        ('T', np.float64),
+        ('count', np.float64),
+        ('g1', np.float64, (36,)),
+    ])
+    for i in range(len(measSE0)):
+        with open(NOSEpattern.format(i+1), encoding='shift_jis') as f:
+            for line in f:
+                if ".nsz" in line:
+                    match = re.search(r'_(\d+)\.nsz', line)
+                    meas_ID = int(match.group(1))
+                if "Temperature of the Holder" in line:
+                    T = float(line.split(",")[1])
+                if "Count Rate" in line:
+                    count = float(line.split(",")[1])
+                if "Correlation" in line:
+                    #g2-1
+                    data = np.loadtxt(f, delimiter=",", skiprows=0)
+        measSE0[i] = (i+1, meas_ID, T, count, np.sqrt(data[:,1]))
+    
+    #load DLS data from Y16SE6 in buffer
     dirfile = os.path.join(dirname, '../DLS/Y16SE6/')
     Ncooling = 5
     Nrepeat = 5
     Ntemperature = 36
     measurements = []
+    
+    #load water viscosity
+    #water = np.loadtxt(os.path.join(dirfile, '../water.tsv'), skiprows=1)
+    #eta_w = CubicSpline(water[:,0], water[:,1]*1e-3) #Pa.s
     
     #load all measurements
     for c in range(Ncooling):
@@ -69,34 +136,83 @@ if __name__ == '__main__':
         measurements.append(load_and_sort(os.path.join(dirfile, name)))
     measurements = np.reshape(measurements, (Ncooling, Ntemperature, Nrepeat))
     
-    #average g2 across coolings and repeats, taking count rates into account
-    meang2s = np.sum(measurements['count'][...,None] * (1 + measurements['g1']**2), axis=(0,2)) / measurements['count'].sum((0,2))[...,None]
+    #average g2 across coolings and repeats, taking count rates into account, but discarding low intercepts
+    good = measurements['g1'][...,0] > 1-4e-3
+    meang2s = np.sum((good * measurements['count'])[...,None] * (1 + measurements['g1']**2), axis=(0,2)) / np.maximum(1, (good * measurements['count']).sum((0,2)))[...,None]
     meang1s = np.sqrt(meang2s -1)
-    Ts = np.rint(measurements['T'].mean((0,2)))
+    Ts = np.rint(measurements['T'].mean((0,2))).astype(int)
     
+    #draw J(t)
     fig, axs = plt.subplots(2,1, sharex=True, sharey=True, layout='constrained', figsize=(3.375,6))
-    for ax, iT in zip(axs, [10,19]):
-        goodt = meang1s[iT]>1e-1
-        err_f = 1-meang1s[iT][0]
-        msd = f2msd(meang1s[iT], q)*1e12 #µm²
-        err_minus_msd = np.maximum(0, msd - f2msd(meang1s[iT] + err_f, q)*1e12)
-        err_plus_msd = f2msd(np.maximum(0, meang1s[iT] - err_f), q)*1e12 - msd
-        ax.errorbar(
-            Dts[goodt], msd[goodt], 
-            yerr=(err_minus_msd[goodt], err_plus_msd[goodt]),
-            ls='none', marker='o', mfc='none', zorder=1.5,
-            label=f'T={Ts[iT]}°C'
+    for T,m in zip([75,70,65,60,55], '^osv.'):
+        #Y16SE0
+        i0 = np.argmin(np.abs(measSE0['T'] - T))
+        g1 = measSE0['g1'][i0]
+        err_f = 1-g1[0]
+        J = f2J(g1, T=T, q=q, a=a) #Pa-1
+        err_minus_J = np.maximum(0, J - f2J(g1 + err_f, T, q, a))
+        err_plus_J = f2J(np.maximum(0, g1 - err_f), T, q, a) - J
+        goodt = g1>0.1
+        line = axs[0].errorbar(
+            Dts[goodt], J[goodt], 
+            yerr=(err_minus_J[goodt], err_plus_J[goodt]),
+            ls='none', marker=m, mfc='none',
+            label=f'T={T:d}°C'
+        )[0]
+        #Johnson-Segalman fit of Y16SE0
+        eta_s, eta, tau =  curve_fit(
+            lambda t, eta_s, eta, tau: np.log(jsJ(t, eta/tau, eta, eta_s)),
+            Dts[goodt],
+            np.log(J[goodt]),
+            [5e-4, 0.1, 0.1],
+            sigma = (err_plus_J + err_minus_J)[goodt]/J[goodt],
+            bounds=(0, np.inf),
+        )[0]
+        goodt = Dts < eta_s/eta*tau
+        #plot as if Newtonian with viscosity eta_s
+        axs[0].plot(
+            Dts[goodt], Dts[goodt]/eta_s,
+            color=line.get_color()
+            )
+        
+        #Y16SE6
+        iT = np.argmin(np.abs(Ts - T))
+        g1 = meang1s[iT]
+        err_f = 1-g1[0]
+        J = f2J(g1, T=T, q=q, a=a) #Pa-1
+        err_minus_J = np.maximum(0, J - f2J(g1 + err_f, T, q, a))
+        err_plus_J = f2J(np.maximum(0, g1 - err_f), T, q, a) - J
+        goodt = g1>0.2
+        axs[1].errorbar(
+            Dts[goodt], J[goodt], 
+            yerr=(err_minus_J[goodt], err_plus_J[goodt]),
+            ls='none', marker=m, color=line.get_color(), mfc='none',
+            label=f'T={T:d}°C'
+        )[0]
+        #Johnson-Segalman fit of Y16SE6
+        Gi, tau, eta_s =  curve_fit(
+            lambda t, Gi, tau, eta_s: np.log(jsJ(t, Gi, Gi*tau, eta_s)),
+            Dts[goodt],
+            np.log(J[goodt]),
+            [0.1, 10, eta_s/10],
+            #sigma = (err_plus_J + err_minus_J)[goodt]/J[goodt],
+            bounds=(0, np.inf),
+        )[0]
+        print(np.ptp((err_plus_J + err_minus_J)[goodt]/J[goodt]))
+        axs[1].plot(
+            Dts[goodt], 
+            jsJ(Dts[goodt], Gi, Gi*tau, eta_s), 
+            color=line.get_color(),
+            #label='JS fit'
         )
-        #ax.plot(Dts[goodt], f2msd(meang1s[iT][goodt], q)*1e12, marker='.', label=f'T={Ts[iT]}°C')
-        #ax.plot(Dts, meang1s[iT], marker='.', label=f'T={Ts[iT]}°C')
-        #ax.plot(Dts, measurements['g1'][0,iT,0], marker='.', label=f'T={Ts[iT]}°C')
         
     axs[0].set_xscale('log')
     axs[0].set_yscale('log')
+    #axs[0].set_ylim(2e-5, 2e-2)
     axs[-1].set_xlabel(r'$\Delta t$ (s)')
-    for ax in axs:
-        ax.set_ylabel(r'$\langle\Delta r^2\rangle$ µm$^2$')
-        ax.legend()
+    for ax, SE in zip(axs, [0,6]):
+        ax.set_ylabel(r'$J(t)$ Pa$^{-1}$')
+        ax.legend(title=f'Y16SE{SE}')
     
     for ext in ['png', 'pdf']:
-        plt.savefig(f'MSD_Y16SE6.{ext}')
+        plt.savefig(f'J_Y16SE0_Y16SE6.{ext}')
