@@ -1,0 +1,115 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+NP500nm-0.1pct-purwater_6425.nsz,,
+Measurement Results,,
+Date,2025”N9ŒŽ5“ú 19:30:21,
+Measurement Type,Particle Size,
+Sample Name,NP500nm-0.1pct-purwater,
+Material,   ,
+Scattering Angle,90,
+Temperature of the Holder,24.9,°C
+Dispersion Medium Viscosity,0.897,mPa·s
+Transmission Intensity before Meas.,11081,
+Transmission Intensity after Meas.,11343,
+Run Duration,120,Seconds
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,9080,kCPS
+ACF Intercept,0.998,
+Calculation Results,,
+Cumulant Operations,,
+Z-Average,456.0,nm
+PI,0.030,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Diameter (nm),Frequency (%)
+0.34,0.000
+0.38,0.000
+0.43,0.000
+0.49,0.000
+0.55,0.000
+0.62,0.000
+0.70,0.000
+0.80,0.000
+0.90,0.000
+1.02,0.000
+1.15,0.000
+1.30,0.000
+1.47,0.000
+1.66,0.000
+1.87,0.000
+2.11,0.000
+2.39,0.000
+2.70,0.000
+3.05,0.000
+3.45,0.000
+3.89,0.000
+4.40,0.000
+4.97,0.000
+5.61,0.000
+6.34,0.000
+7.17,0.000
+8.10,0.000
+9.15,0.000
+10.34,0.000
+11.68,0.000
+13.20,0.000
+14.91,0.000
+16.84,0.000
+19.03,0.000
+21.50,0.000
+24.29,0.000
+27.45,0.000
+31.01,0.000
+35.03,0.000
+39.58,0.000
+44.72,0.000
+50.53,0.000
+57.09,0.000
+64.50,0.000
+72.87,0.000
+82.33,0.000
+93.02,0.000
+105.10,0.000
+118.74,0.000
+134.16,0.000
+151.57,0.000
+171.25,0.000
+193.48,0.000
+218.60,0.000
+246.98,0.000
+279.04,0.000
+315.27,4.131
+356.20,10.486
+402.44,15.590
+454.69,18.031
+513.71,17.713
+580.41,15.098
+655.76,10.890
+740.89,6.018
+837.07,1.833
+945.74,0.210
+1068.52,0.000
+1207.24,0.000
+1363.97,0.000
+1541.04,0.000
+1741.10,0.000
+1967.14,0.000
+2222.51,0.000
+2511.05,0.000
+2837.04,0.000
+3205.35,0.000
+3621.48,0.000
+4091.63,0.000
+4622.81,0.000
+5222.96,0.000
+5901.02,0.000
+6667.10,0.000
+7532.65,0.000
+8510.56,0.000
+
+
