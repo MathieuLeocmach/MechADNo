@@ -157,7 +157,7 @@ if __name__ == '__main__':
             Dts[goodt], J[goodt], 
             yerr=(err_minus_J[goodt], err_plus_J[goodt]),
             ls='none', marker=m, mfc='none',
-            label=f'T={T:d}°C'
+            label=f'{T:d}°C'
         )[0]
         #Johnson-Segalman fit of Y16SE0
         eta_s, eta, tau =  curve_fit(
@@ -187,7 +187,7 @@ if __name__ == '__main__':
             Dts[goodt], J[goodt], 
             yerr=(err_minus_J[goodt], err_plus_J[goodt]),
             ls='none', marker=m, color=line.get_color(), mfc='none',
-            label=f'T={T:d}°C'
+            label=f'{T:d}°C'
         )[0]
         #Johnson-Segalman fit of Y16SE6
         Gi, tau, eta_s =  curve_fit(
@@ -213,6 +213,7 @@ if __name__ == '__main__':
     axs[-1].set_xlabel(r'$\Delta t$ (s)')
     for ax, SE in zip(axs, [0,6]):
         ax.set_ylabel(r'$J(t)$ Pa$^{-1}$')
+        ax.set_ylim(3e-3,5)
         ax.legend(title=f'Y16SE{SE}')
     
     for ext in ['png', 'pdf']:
