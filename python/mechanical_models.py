@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import numpy as np
+from scipy import constants as const
 from scipy.special import gamma
 import mpmath
 
@@ -10,7 +11,7 @@ class MechanicalModel(ABC):
 
         In principle, only this method needs to be implemented as all other
         methods can be derived from the results of this one. However in practice,
-        analytic simplified expressions of the other methods will be more
+        analytical simplified expressions of the other methods will be more
         efficient, in particular J(t) that implies inverse Laplace transform
         that is slow numerically."""
         pass
@@ -34,6 +35,11 @@ class MechanicalModel(ABC):
         return np.array([
             mpmath.invertlaplace(Laplace_J, x)
             for x in t], float)
+
+    def MSD(self, t, T, a, d=3):
+        """Mean square displacement function of time of a particle of radius a (m) immersed in the
+        medium at temperature T (°C). Dimensionality is d."""
+        return d*const.Boltzmann * const.convert_temperature(T, 'C', 'K') /(3*np.pi*a) * self.J(t)
 
 class Newtonian(MechanicalModel):
     """Newtonian fluid of constant viscosity η (Pa.s)"""

@@ -31,7 +31,8 @@ def f2msd(f,q=23e6,d=3):
     return -2*d/q**2 * np.log(f)
 
 def sort_files(filename):
-    """sort files of cooling by measurement order"""
+    """sort files of cooling by measurement order. 
+    Return columns (file number, measurement order, temperature, count rate)"""
     files = np.empty((180,4))
     for i in range(len(files)):
         files[i,0] = i+1
