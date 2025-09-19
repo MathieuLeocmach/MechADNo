@@ -4,7 +4,75 @@ from scipy import constants as const
 from scipy.special import gamma
 import mpmath
 
-class MechanicalModel(ABC):
+def text_spring(G):
+    return f"""
+
+____╱╲  ╱╲  ╱╲  ___{'_'*len(G)}
+      ╲╱  ╲╱  ╲╱ {G}
+"""
+
+def text_dashpot(eta):
+    return f"""
+    ___
+_____| |____{'_'*len(eta)}
+    _|_| {eta}
+"""
+
+def text_springpot(V, alpha):
+    return f"""
+
+____╱╲____{'_'*(len(V)+len(alpha))}
+    ╲╱ {V}, {alpha}
+"""
+
+def text_series(a,b):
+    """join two element strings in series"""
+    maxla = max(map(len, a.splitlines()))
+    alines = [line.ljust(maxla) for line in a.splitlines()]
+    blines = [line for line in b.splitlines()]
+    if len(alines)>len(blines):
+        blines = ['']*(len(alines) - len(blines)) + blines
+    elif len(blines)>len(alines):
+        alines = [' '*maxla]*(len(blines) - len(alines)) + alines
+    ret = [
+        aline+bline
+        for aline, bline in zip(alines, blines)
+    ]
+    return '\n'.join(ret)
+
+def text_parallel(*args):
+    """join several element strings in parallel"""
+    assert(len(args)>1), """At least 2 elements can be in parallel"""
+    maxls = [
+        max(map(len, a.splitlines()))
+        for a in args
+        ]
+    maxL = max(maxls)
+    ret = []
+    for line in args[0].splitlines()[:-2]:
+        ret.append(line.ljust(maxls[0]).center(maxL+8))
+    line = args[0].splitlines()[-2]
+    ret.append('    '+line.ljust(maxls[0],'_').center(maxL, '_')+'    ')
+    line = args[0].splitlines()[-1]
+    ret.append('   |'+line.ljust(maxls[0]).center(maxL)+'|   ')
+    for a in args[1:-1]:
+        maxl = max(map(len, a.splitlines()))
+        for line in a.splitlines()[:-2]:
+            ret.append('   |'+line.ljust(maxl).center(maxL)+'|   ')
+        line = a.splitlines()[-2]
+        ret.append('   |'+line.ljust(maxl,'_').center(maxL, '_')+'|   ')
+        line = a.splitlines()[-1]
+        ret.append('   |'+line.ljust(maxl).center(maxL)+'|   ')
+    for line in args[-1].splitlines()[:-2]:
+        ret.append('   |'+line.ljust(maxls[-1]).center(maxL)+'|   ')
+    line = args[-1].splitlines()[-2]
+    ret.append('___|'+line.ljust(maxls[-1], '_').center(maxL, '_')+'|___')
+    line = args[-1].splitlines()[-1]
+    ret.append(line.ljust(maxls[-1]).center(maxL+8))
+    return '\n'.join(ret)
+
+class LinearMechanicalModel(ABC):
+    diagram = """No implemented diagram"""
     @abstractmethod
     def Laplace_G(self, s):
         """The modulus in the Laplace domain.
@@ -41,8 +109,35 @@ class MechanicalModel(ABC):
         medium at temperature T (°C). Dimensionality is d."""
         return d*const.Boltzmann * const.convert_temperature(T, 'C', 'K') /(3*np.pi*a) * self.J(t)
 
-class Newtonian(MechanicalModel):
+
+class Elastic(LinearMechanicalModel):
+    """Elastic solid of constant elasticity G (Pa)"""
+
+    diagram = text_spring('G')
+
+    def __init__(self, G):
+        self.G = G
+
+    def Laplace_G(self, s):
+        return np.full_like(s, self.G)
+
+    def Gp(self, ω):
+        return np.full_like(ω, self.G)
+
+    def Gpp(self, ω):
+        return np.zeros_like(ω)
+
+    def tandelta(self, ω):
+        return np.zeros_like(ω)
+
+    def J(self, t):
+        return np.full_like(t, 1/self.G)
+
+
+class Newtonian(LinearMechanicalModel):
     """Newtonian fluid of constant viscosity η (Pa.s)"""
+
+    diagram = text_dashpot('η')
 
     def __init__(self, η):
         self.η = η
@@ -62,8 +157,10 @@ class Newtonian(MechanicalModel):
     def J(self, t):
         return t/self.η
 
-class Maxwell(MechanicalModel):
+class Maxwell(LinearMechanicalModel):
     """Maxwell model of an elasticity G (Pa) in series with a viscosity η (Pa.s). The characteristic time is τ (s)"""
+
+    diagram = text_series(text_spring('G'), text_dashpot('η'))
 
     def __init__(self, G=None, η=None, τ=None):
         assert G is None or η is None or τ is None, "G, η and τ anre not independent. All three cannot be set."
@@ -107,8 +204,10 @@ class Maxwell(MechanicalModel):
     def J(self, t):
         return 1/self.G + t/self.η
 
-class KelvinVoigt(MechanicalModel):
+class KelvinVoigt(LinearMechanicalModel):
     """Kelvin-Voigt model of an elasticity G (Pa) in parallel to a viscosity η (Pa.s). The characteristic time is τ (s)"""
+
+    diagram = text_parallel(text_spring('G'), text_dashpot('η'))
 
     def __init__(self, G=None, η=None, τ=None):
         assert G is None or η is None or τ is None, "G, η and τ anre not independent. All three cannot be set."
@@ -147,6 +246,8 @@ class KelvinVoigt(MechanicalModel):
 class JohnsonSegalman(Maxwell):
     """Johnson-Segalmant model of a viscosity ηs (Pa.s) in parallel to a Maxwell of elasticity G (Pa) and viscosity η (Pa.s)."""
 
+    diagram = text_parallel(text_dashpot('ηs'), Maxwell.diagram)
+
     def __init__(self, G, η, ηs):
             self.G = G
             self.η = η
@@ -164,8 +265,10 @@ class JohnsonSegalman(Maxwell):
     def J(self, t):
         return t/(self.η + self.ηs) + 1/self.G * (self.η/(self.η + self.ηs))**2 * (1 - np.exp(-self.G * (1/self.η + 1/self.ηs)*t))
 
-class PowerLaw(MechanicalModel):
+class PowerLaw(LinearMechanicalModel):
     """A springpot element of exponent α and pseudo-property V (Pa.s^α)"""
+
+    diagram = text_springpot('V', 'α')
 
     def __init__(self, V, α):
             self.V = V
@@ -186,8 +289,10 @@ class PowerLaw(MechanicalModel):
     def J(self, t):
         return t**self.α / (self.V * gamma(1 + self.α))
 
-class FractionalMaxwell(MechanicalModel):
+class FractionalMaxwell(LinearMechanicalModel):
     """Two springpot elements in series of respective exponent α and β and respective pseudo-property V (Pa.s^α) and G (Pa.s^β)"""
+
+    diagram = text_series(text_springpot('V', 'α'), text_springpot('G', 'β'))
 
     def __init__(self, α, β, V=None, G=None, τ=None):
         assert G is None or V is None or τ is None, "G, V and τ are not independent. All three cannot be set."
