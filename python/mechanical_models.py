@@ -5,29 +5,44 @@ import mpmath
 
 class MechanicalModel(ABC):
     @abstractmethod
-    def Gp(self, ω):
-        """Elastic modulus function of pulsation ω"""
+    def Laplace_G(self, s):
+        """The modulus in the Laplace domain.
+
+        In principle, only this method needs to be implemented as all other
+        methods can be derived from the results of this one. However in practice,
+        analytic simplified expressions of the other methods will be more
+        efficient, in particular J(t) that implies inverse Laplace transform
+        that is slow numerically."""
         pass
 
-    @abstractmethod
+    def Gp(self, ω):
+        """Elastic modulus function of pulsation ω"""
+        return np.real(self.Laplace_G(1j * ω))
+
     def Gpp(self, ω):
         """Viscous modulus function of pulsation ω"""
-        pass
+        return np.imag(self.Laplace_G(1j * ω))
 
     def tandelta(self, ω):
         """Loss tangent function of pulsation ω"""
-        return self.Gpp(ω, **kwargs) / self.Gp(ω, **kwargs)
+        G = self.Laplace_G(1j * ω)
+        return np.imag(G) / np.real(G)
 
-    @abstractmethod
     def J(self, t):
         """Creep compilance function of time"""
-        pass
+        Laplace_J = lambda s: 1/s/self.self.Laplace_G(s)
+        return np.array([
+            mpmath.invertlaplace(Laplace_J, x)
+            for x in t], float)
 
 class Newtonian(MechanicalModel):
     """Newtonian fluid of constant viscosity η (Pa.s)"""
 
     def __init__(self, η):
         self.η = η
+
+    def Laplace_G(self, s):
+        return s * self.η
 
     def Gp(self, ω):
         return np.zeros_like(ω)
@@ -63,6 +78,8 @@ class Maxwell(MechanicalModel):
         else:
             raise KeyError("Two among G, η or τ must be defined")
 
+    def Laplace_G(self, s):
+        return s * self.η / (1 + s*self.τ)
 
     def Gp(self, ω):
         return self.G * (
@@ -106,6 +123,8 @@ class KelvinVoigt(MechanicalModel):
         else:
             raise KeyError("Two among G, η or τ must be defined")
 
+    def Laplace_G(self, s):
+        return self.G + s * self.η
 
     def Gp(self, ω):
         return np.full_like(ω, self.G)
@@ -127,6 +146,9 @@ class JohnsonSegalman(Maxwell):
             self.η = η
             self.ηs = ηs
 
+    def Laplace_G(self, s):
+        return Maxwell.Laplace_G(self, s) + ω * self.ηs
+
     def Gpp(self, ω):
         return Maxwell.Gpp(self, ω) + ω * self.ηs
 
@@ -142,6 +164,9 @@ class PowerLaw(MechanicalModel):
     def __init__(self, V, α):
             self.V = V
             self.α = α
+
+    def Laplace_G(self, s):
+        return self.V * s ** self.α
 
     def Gp(self, ω):
         return self.V * np.cos(π * self.α / 2) * ω**self.α
@@ -176,6 +201,9 @@ class FractionalMaxwell(MechanicalModel):
             self.G = G
             self.V = V
             self.τ = (V/G * (np.cos(π*β/2) - np.sin(π*β/2)) / (np.sin(π*α/2) - np.cos(π*α/2)))**(1/(α-β))
+
+    def Laplace_G(self, s):
+        return self.V * self.G * s**(self.α + self.β) /(self.V * s**self.α + self.G * s**self.β)
 
     def Gp(self, ω):
         Go = G*ω**β
