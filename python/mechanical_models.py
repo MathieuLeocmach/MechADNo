@@ -36,7 +36,7 @@ class MechanicalModel(ABC):
             mpmath.invertlaplace(Laplace_J, x)
             for x in t], float)
 
-    def MSD(self, t, T, a, d=3):
+    def msd(self, t, T, a, d=3):
         """Mean square displacement function of time of a particle of radius a (m) immersed in the
         medium at temperature T (°C). Dimensionality is d."""
         return d*const.Boltzmann * const.convert_temperature(T, 'C', 'K') /(3*np.pi*a) * self.J(t)
