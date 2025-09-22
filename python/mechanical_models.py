@@ -104,6 +104,8 @@ class SeriesDiagram(Diagram):
         for child in self.children:
             for l, line in enumerate(f'{child}'.splitlines()[::-1]):
                 ret[len(ret)-l-1] += line
+            for l in range(len(ret)-child.height):
+                ret[l] += ' '*child.width
         return "\n".join(ret)
 
 class ParallelDiagram(Diagram):
@@ -254,7 +256,7 @@ class LinearMechanicalModel(ABC):
 class Elastic(LinearMechanicalModel):
     """Elastic solid of constant elasticity G (Pa)"""
 
-    diagram = text_spring('G')
+    diagram = Spring('G')
 
     def __init__(self, G):
         self.G = G
@@ -278,7 +280,7 @@ class Elastic(LinearMechanicalModel):
 class Newtonian(LinearMechanicalModel):
     """Newtonian fluid of constant viscosity η (Pa.s)"""
 
-    diagram = text_dashpot('η')
+    diagram = Dashpot('η')
 
     def __init__(self, η):
         self.η = η
@@ -301,7 +303,7 @@ class Newtonian(LinearMechanicalModel):
 class Maxwell(LinearMechanicalModel):
     """Maxwell model of an elasticity G (Pa) in series with a viscosity η (Pa.s). The characteristic time is τ (s)"""
 
-    diagram = text_series(text_spring('G'), text_dashpot('η'))
+    diagram = Spring('G') + Dashpot('η')
 
     def __init__(self, G=None, η=None, τ=None):
         assert G is None or η is None or τ is None, "G, η and τ anre not independent. All three cannot be set."
@@ -348,7 +350,7 @@ class Maxwell(LinearMechanicalModel):
 class KelvinVoigt(LinearMechanicalModel):
     """Kelvin-Voigt model of an elasticity G (Pa) in parallel to a viscosity η (Pa.s). The characteristic time is τ (s)"""
 
-    diagram = text_parallel(text_spring('G'), text_dashpot('η'))
+    diagram = Spring('G') * Dashpot('η')
 
     def __init__(self, G=None, η=None, τ=None):
         assert G is None or η is None or τ is None, "G, η and τ anre not independent. All three cannot be set."
@@ -387,7 +389,7 @@ class KelvinVoigt(LinearMechanicalModel):
 class JohnsonSegalman(Maxwell):
     """Johnson-Segalmant model of a viscosity ηs (Pa.s) in parallel to a Maxwell of elasticity G (Pa) and viscosity η (Pa.s)."""
 
-    diagram = text_parallel(text_dashpot('ηs'), Maxwell.diagram)
+    diagram = Dashpot('ηs') * Maxwell.diagram
 
     def __init__(self, G, η, ηs):
             self.G = G
@@ -409,7 +411,7 @@ class JohnsonSegalman(Maxwell):
 class PowerLaw(LinearMechanicalModel):
     """A springpot element of exponent α and pseudo-property V (Pa.s^α)"""
 
-    diagram = text_springpot('V', 'α')
+    diagram = Springpot('V', 'α')
 
     def __init__(self, V, α):
             self.V = V
@@ -433,7 +435,7 @@ class PowerLaw(LinearMechanicalModel):
 class FractionalMaxwell(LinearMechanicalModel):
     """Two springpot elements in series of respective exponent α and β and respective pseudo-property V (Pa.s^α) and G (Pa.s^β)"""
 
-    diagram = text_series(text_springpot('V', 'α'), text_springpot('G', 'β'))
+    diagram = Springpot('V', 'α') + Springpot('G', 'β')
 
     def __init__(self, α, β, V=None, G=None, τ=None):
         assert G is None or V is None or τ is None, "G, V and τ are not independent. All three cannot be set."
