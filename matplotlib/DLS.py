@@ -205,7 +205,7 @@ if __name__ == '__main__':
             color=line.get_color(),
             #label='JS fit'
         )
-        print(f'T={T}°C\tGi={Gi:.2f} Pa')
+        print(f'T={T}°C\tGi={Gi:.2f} Pa\ttau={1e3*tau:.2f}ms\teta_s={1e3*eta_s:.3f} mPa.s')
         
     axs[0].set_xscale('log')
     axs[0].set_yscale('log')
