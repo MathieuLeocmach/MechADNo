@@ -56,7 +56,7 @@ class DiagramLeaf(Diagram):
 
 class Spring(DiagramLeaf):
     """A spring of modulus G."""
-    def __init__(self, G):
+    def __init__(self, G='G'):
         self.array = Diagram.str2array(f"""
 
 ____╱╲  ╱╲  ╱╲  ___{'_'*len(G)}
@@ -65,7 +65,7 @@ ____╱╲  ╱╲  ╱╲  ___{'_'*len(G)}
 
 class Dashpot(DiagramLeaf):
     """A dashpot of viscosity eta."""
-    def __init__(self, eta):
+    def __init__(self, eta='η'):
         self.array = Diagram.str2array(f"""
     ___
 _____| |____{'_'*len(eta)}
@@ -74,7 +74,7 @@ _____| |____{'_'*len(eta)}
 
 class Springpot(DiagramLeaf):
     """A springpot of exponent alpha and quasiproperty V."""
-    def __init__(self, V, alpha):
+    def __init__(self, V='V', alpha='α'):
         self.array = Diagram.str2array(f"""
 
 ____╱╲____{'_'*(len(V)+len(alpha))}
