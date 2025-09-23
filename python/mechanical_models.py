@@ -5,6 +5,7 @@ from scipy.special import gamma
 import mpmath
 
 class Diagram(ABC):
+    """A diagram of one or more components in series or in parallel"""
     @abstractmethod
     def __str__(self):
         pass
@@ -18,19 +19,6 @@ class Diagram(ABC):
     @abstractmethod
     def height(self):
         pass
-
-    @staticmethod
-    def str2array(s):
-        lines_lengths =  list(map(len, s.splitlines()))
-        maxl = max(lines_lengths)
-        assert lines_lengths[-2] == maxl, """connection must be the longest line"""
-        return np.array([
-            [
-                c
-                for c in line.ljust(maxl)
-            ]
-            for line in s.splitlines()
-        ])
 
     def __add__(self, other):
         """self and other in series"""
@@ -43,21 +31,33 @@ class Diagram(ABC):
 class DiagramLeaf(Diagram):
     """A single component in the diagram"""
 
+    def __init__(self, s):
+        """Initialize from a string that draws a component.
+        The connecting wires must be on the second to last line"""
+        lines_lengths =  list(map(len, s.splitlines()))
+        maxl = max(lines_lengths)
+        assert lines_lengths[-2] == maxl, """connection must be the longest line"""
+        #add spaces on the right so that each line have the same length
+        self.lines = [
+            line.ljust(maxl)
+            for line in s.splitlines()
+        ]
+
     def __str__(self):
-        return "\n".join(["".join(line) for line in self.array])
+        return "\n".join(self.lines)
 
     @property
     def width(self):
-        return self.array.shape[1]
+        return len(self.lines[0])
 
     @property
     def height(self):
-        return self.array.shape[0]
+        return len(self.lines)
 
 class Spring(DiagramLeaf):
     """A spring of modulus G."""
     def __init__(self, G='G'):
-        self.array = Diagram.str2array(f"""
+        DiagramLeaf.__init__(self, f"""
 
 ____╱╲  ╱╲  ╱╲  ___{'_'*len(G)}
       ╲╱  ╲╱  ╲╱ {G}
@@ -66,7 +66,7 @@ ____╱╲  ╱╲  ╱╲  ___{'_'*len(G)}
 class Dashpot(DiagramLeaf):
     """A dashpot of viscosity eta."""
     def __init__(self, eta='η'):
-        self.array = Diagram.str2array(f"""
+        DiagramLeaf.__init__(self, f"""
     ___
 _____| |____{'_'*len(eta)}
     _|_| {eta}
@@ -75,7 +75,7 @@ _____| |____{'_'*len(eta)}
 class Springpot(DiagramLeaf):
     """A springpot of exponent alpha and quasiproperty V."""
     def __init__(self, V='V', alpha='α'):
-        self.array = Diagram.str2array(f"""
+        DiagramLeaf.__init__(self, f"""
 
 ____╱╲____{'_'*(len(V)+len(alpha))}
     ╲╱ {V}, {alpha}
