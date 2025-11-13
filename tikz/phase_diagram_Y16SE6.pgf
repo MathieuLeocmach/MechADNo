@@ -1,19 +1,47 @@
-﻿\begin{tikzpicture}
-	\begin{axis}[%
-		name={phasediag},
-		width=\columnwidth,
-		xlabel={$\phi_\mathrm{NS}=C_\mathrm{NS}/C_\mathrm{ov}$},
-		ylabel={$T$ (°C)},
-		xmin=0, xmax=1.2,
-		ymin=0, ymax=100,
-		%anchor=outer east,
-		%at={($(Sato.west)+(\textwidth,0)$)},
-		%visible on=<2->
-	]
-		\addplot[ilmorange, no marks] table[x expr=\thisrowno{0}/1.5/1015,y index=3]{simulations/mfold_SE6_concentration.tsv} node[anchor=base east] at (axis cs:1.2,50) {not percolated nanostars};
-		\draw[ultra thick, lightgray, dashed] (axis cs:894/1015, 0) -- (axis cs:894/1015,20) to[out=90, in=0] (axis cs:894/1015/2,38.8) node at (axis cs:0.4,20) {phase sep};
-		\node[ilmcolor] at (axis cs:1.05,20) {gel};
-		\addplot[ilmblue, no marks] table[x expr=\thisrowno{0}/1015]{simulations/melting_Y16SE0_concentrations.tsv} node[anchor=north east] at (rel axis cs:1,1) {single strands};
-		\draw[->, ultra thick, ilmcolor] (axis cs:1,95) -- (axis cs:1,35);
-	\end{axis}
+\begin{tikzpicture}
+  \begin{axis}[
+    name=phasediag,
+    width=0.8\columnwidth,
+    height=0.7\columnwidth,
+    xlabel={\textbf{$\phi_\mathrm{NS}=C_\mathrm{NS}/C_\mathrm{ov}$}},
+    ylabel={\textbf{$T$ ($^\circ$C)}},
+    xmin=0, xmax=1.2,
+    ymin=0, ymax=100,
+    tick label style={font=\large},
+    label style={font=\Large},
+    major tick length=5pt,
+    clip=true,
+  ]    
+
+    \addplot[ultra thick, BurntOrange, no marks]
+      table[x expr=\thisrowno{0}/1.5/1015, y index=3]
+      {simulations/mfold_SE6_concentration.tsv};
+    \node[BurntOrange, anchor=base east] at (axis cs:0.9,60)
+      {\textbf{non-percolated nanostars}};
+
+    \draw[ultra thick, Gray, dashed]
+      (axis cs:894/1015, 0) -- (axis cs:894/1015,20)
+      to[out=90, in=0] (axis cs:894/1015/2,38.8)
+      node at (axis cs:0.45,20) {\textbf{phase separation region}};
+      
+    \node[Plum] at (axis cs:1.05,20) {\textbf{bulk gel}};
+
+    \addplot[ultra thick, SkyBlue, no marks]
+      table[x expr=\thisrowno{0}/1015]
+      {simulations/melting_Y16SE0_concentrations.tsv};
+    \node[SkyBlue, anchor=north east] at (rel axis cs:0.6,0.94)
+      {\textbf{single strands}};
+
+    \draw[->, ultra thick, Plum] (axis cs:1,95) -- (axis cs:1,35);
+  \end{axis}
+
+  \begin{scope}[clip=false]
+    \node[anchor=west, xshift=0.5cm, yshift=-0.5cm] at (phasediag.outer east |- phasediag.north)
+      {\includegraphics[width=2.5cm]{svg_schematics/ssDNA.pdf}};
+    \node[anchor=west, yshift=-2.5cm] at (phasediag.outer east |- phasediag.north)
+      {\includegraphics[width=3cm]{svg_schematics/free-ns.pdf}};
+    \node[anchor=west, yshift=-5.5cm] at (phasediag.outer east |- phasediag.north)
+      {\includegraphics[width=3cm]{svg_schematics/gel.pdf}};
+  \end{scope}
+
 \end{tikzpicture}
