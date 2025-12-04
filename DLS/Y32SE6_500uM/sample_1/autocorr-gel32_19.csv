@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230110-gely32se6-500uM-pscooh-0.1pct_1377.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ10“ú 15:37:01,
+Measurement Type,Particle Size,
+Sample Name,20230110-gely32se6-500uM-pscooh-0.1pct,
+Scattering Angle,90,
+Temperature of the Holder,71.9,°C
+Dispersion Medium Viscosity,0.398,mPa·s
+Transmission Intensity before Meas.,18517,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,3657,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,1.00,
+Peak2 S.P.Area Ratio,---,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),914.3,nm
+Peak2 Size (Mean),---,nm
+Peak3 Size (Mean),---,nm
+Total Mean,914.3,nm
+Peak1 S. D.,338.1,nm
+Peak2 S. D.,---,nm
+Peak3 S. D.,---,nm
+Total S. D.,338.1,nm
+Peak1 Mode,785.6,nm
+Peak2 Mode,---,nm
+Peak3 Mode,---,nm
+Total Mode,785.6,nm
+Cumulant Operations,,
+Z-Average,1348.7,nm
+PI,0.738,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.995707,0.995696
+1.4,0.994595,0.994623
+1.9,0.993387,0.993316
+2.6,0.991508,0.991547
+3.6,0.989142,0.989135
+5,0.985892,0.985968
+6.9,0.981914,0.982016
+9.5,0.977094,0.977155
+13.1,0.971318,0.971258
+18.1,0.964444,0.964249
+25,0.956347,0.956058
+34.5,0.946577,0.946382
+47.6,0.934476,0.934496
+65.7,0.918921,0.919204
+90.7,0.898541,0.898986
+125.2,0.871722,0.872154
+172.8,0.836558,0.836898
+238.5,0.791485,0.791365
+329.2,0.734559,0.733964
+454.4,0.664718,0.663944
+627.2,0.583021,0.582201
+865.7,0.492628,0.492095
+1194.9,0.398891,0.399819
+1649.3,0.311966,0.313562
+2276.5,0.24054,0.241117
+3142.2,0.186119,0.186796
+4337.1,0.150289,0.149631
+5986.4,0.126094,0.12422
+8262.9,0.104857,0
+11405.1,0.0924745,0
+15742.2,0.0865493,0
+21728.6,0.0737694,0
+29991.5,0.0632462,0
+41396.6,0.0582122,0
+57138.8,0.0480351,0
+78867.4,0.0239599,0
+
+
