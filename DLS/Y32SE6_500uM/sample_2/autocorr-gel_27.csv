@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample_1830.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ25“ú 15:53:37,
+Measurement Type,Particle Size,
+Sample Name,20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample,
+Scattering Angle,90,
+Temperature of the Holder,63.9,°C
+Dispersion Medium Viscosity,0.444,mPa·s
+Transmission Intensity before Meas.,22367,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,940,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,1.00,
+Peak2 S.P.Area Ratio,---,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),1898.5,nm
+Peak2 Size (Mean),---,nm
+Peak3 Size (Mean),---,nm
+Total Mean,1898.5,nm
+Peak1 S. D.,700.0,nm
+Peak2 S. D.,---,nm
+Peak3 S. D.,---,nm
+Total S. D.,700.0,nm
+Peak1 Mode,1632.1,nm
+Peak2 Mode,---,nm
+Peak3 Mode,---,nm
+Total Mode,1632.1,nm
+Cumulant Operations,,
+Z-Average,2422.9,nm
+PI,0.429,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.989188,0.989136
+1.4,0.986507,0.986622
+1.9,0.983695,0.98362
+2.6,0.979532,0.97966
+3.6,0.974633,0.974447
+5,0.967914,0.967905
+6.9,0.9601,0.960193
+9.5,0.951432,0.951337
+13.1,0.941357,0.941436
+18.1,0.930681,0.930784
+25,0.919768,0.919845
+34.5,0.909111,0.909029
+47.6,0.898777,0.898532
+65.7,0.888247,0.888046
+90.7,0.876423,0.876537
+125.2,0.862037,0.86242
+172.8,0.843643,0.844019
+238.5,0.819831,0.819771
+329.2,0.788536,0.788109
+454.4,0.748064,0.747377
+627.2,0.696273,0.695933
+865.7,0.631847,0.632425
+1194.9,0.5549,0.556374
+1649.3,0.46833,0.469094
+2276.5,0.376289,0.374715
+3142.2,0.282519,0.28053
+4337.1,0.195465,0.195698
+5986.4,0.127128,0.128109
+8262.9,0.0785635,0.0809266
+11405.1,0.0512172,0.0515249
+15742.2,0.0350958,0.0338804
+21728.6,0.0243423,0.0222463
+29991.5,0.0192278,0
+41396.6,0.0105464,0
+57138.8,0.0046047,0
+78867.4,0.0001,0
+
+

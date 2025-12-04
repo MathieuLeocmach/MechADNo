@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample_1843.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ25“ú 17:05:46,
+Measurement Type,Particle Size,
+Sample Name,20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample,
+Scattering Angle,90,
+Temperature of the Holder,51.0,°C
+Dispersion Medium Viscosity,0.541,mPa·s
+Transmission Intensity before Meas.,22701,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,1268,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,0.26,
+Peak2 S.P.Area Ratio,0.74,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),1.3,nm
+Peak2 Size (Mean),107.4,nm
+Peak3 Size (Mean),---,nm
+Total Mean,79.6,nm
+Peak1 S. D.,0.2,nm
+Peak2 S. D.,12.4,nm
+Peak3 S. D.,---,nm
+Total S. D.,47.8,nm
+Peak1 Mode,1.3,nm
+Peak2 Mode,108.8,nm
+Peak3 Mode,---,nm
+Total Mode,108.8,nm
+Cumulant Operations,,
+Z-Average,---,nm
+PI,---,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.986684,0.986743
+1.4,0.983682,0.983673
+1.9,0.981169,0.980786
+2.6,0.976732,0.977201
+3.6,0.972306,0.97241
+5,0.966462,0.96616
+6.9,0.958573,0.958434
+9.5,0.948854,0.9491
+13.1,0.938145,0.93816
+18.1,0.925994,0.925984
+25,0.913545,0.913383
+34.5,0.901168,0.901293
+47.6,0.89049,0.890475
+65.7,0.881183,0.88127
+90.7,0.873636,0.87358
+125.2,0.867109,0.867037
+172.8,0.861237,0.861113
+238.5,0.854897,0.855066
+329.2,0.847963,0.848048
+454.4,0.839258,0.839334
+627.2,0.8284,0.828334
+865.7,0.814555,0.814364
+1194.9,0.79657,0.796431
+1649.3,0.773195,0.773138
+2276.5,0.742429,0.742756
+3142.2,0.703066,0.703448
+4337.1,0.653342,0.653539
+5986.4,0.59228,0.591877
+8262.9,0.51949,0.518335
+11405.1,0.434977,0.434402
+15742.2,0.342072,0.343645
+21728.6,0.248849,0.251784
+29991.5,0.167767,0.166242
+41396.6,0.100587,0.0950047
+57138.8,0.0399746,0.044344
+78867.4,0.0120369,0
+
+

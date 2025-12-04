@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample_1837.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ25“ú 16:32:28,
+Measurement Type,Particle Size,
+Sample Name,20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample,
+Scattering Angle,90,
+Temperature of the Holder,57.0,°C
+Dispersion Medium Viscosity,0.493,mPa·s
+Transmission Intensity before Meas.,23375,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,994,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,0.16,
+Peak2 S.P.Area Ratio,0.84,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),88.1,nm
+Peak2 Size (Mean),4249.7,nm
+Peak3 Size (Mean),---,nm
+Total Mean,3591.7,nm
+Peak1 S. D.,10.3,nm
+Peak2 S. D.,1636.7,nm
+Peak3 S. D.,---,nm
+Total S. D.,2135.6,nm
+Peak1 Mode,87.2,nm
+Peak2 Mode,6682.0,nm
+Peak3 Mode,---,nm
+Total Mode,6682.0,nm
+Cumulant Operations,,
+Z-Average,6295.1,nm
+PI,0.701,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.990754,0.990797
+1.4,0.988901,0.988568
+1.9,0.985675,0.986127
+2.6,0.982849,0.982965
+3.6,0.979142,0.978816
+5,0.973707,0.973597
+6.9,0.967364,0.967373
+9.5,0.959944,0.96006
+13.1,0.951543,0.951622
+18.1,0.942064,0.942259
+25,0.932589,0.932532
+34.5,0.923382,0.923185
+47.6,0.915105,0.914863
+65.7,0.907863,0.907735
+90.7,0.90102,0.901272
+125.2,0.894008,0.894481
+172.8,0.886223,0.886441
+238.5,0.876763,0.876533
+329.2,0.864749,0.864205
+454.4,0.849014,0.848656
+627.2,0.828636,0.828654
+865.7,0.802298,0.802545
+1194.9,0.76792,0.768441
+1649.3,0.723921,0.72448
+2276.5,0.668445,0.669126
+3142.2,0.602286,0.601642
+4337.1,0.525106,0.522785
+5986.4,0.436913,0.435507
+8262.9,0.343367,0.345171
+11405.1,0.25487,0.258709
+15742.2,0.182148,0.182589
+21728.6,0.123865,0.120589
+29991.5,0.0745676,0.0731758
+41396.6,0.0222335,0
+57138.8,0.0001,0
+78867.4,0.0001,0
+
+

@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample_1828.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ25“ú 15:42:33,
+Measurement Type,Particle Size,
+Sample Name,20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample,
+Scattering Angle,90,
+Temperature of the Holder,65.9,°C
+Dispersion Medium Viscosity,0.432,mPa·s
+Transmission Intensity before Meas.,23150,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,2106,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,1.00,
+Peak2 S.P.Area Ratio,---,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),1455.4,nm
+Peak2 Size (Mean),---,nm
+Peak3 Size (Mean),---,nm
+Total Mean,1455.4,nm
+Peak1 S. D.,504.5,nm
+Peak2 S. D.,---,nm
+Peak3 S. D.,---,nm
+Total S. D.,504.5,nm
+Peak1 Mode,1279.4,nm
+Peak2 Mode,---,nm
+Peak3 Mode,---,nm
+Total Mode,1279.4,nm
+Cumulant Operations,,
+Z-Average,2064.9,nm
+PI,0.470,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.989964,0.990401
+1.4,0.988467,0.98811
+1.9,0.98558,0.985367
+2.6,0.981686,0.981737
+3.6,0.977039,0.976938
+5,0.970941,0.970893
+6.9,0.963598,0.963737
+9.5,0.955534,0.955496
+13.1,0.946048,0.946268
+18.1,0.936098,0.936309
+25,0.925638,0.925959
+34.5,0.915643,0.915396
+47.6,0.905091,0.904544
+65.7,0.893467,0.892942
+90.7,0.87971,0.879554
+125.2,0.86242,0.86277
+172.8,0.840064,0.840715
+238.5,0.81093,0.811488
+329.2,0.772795,0.773158
+454.4,0.72393,0.72383
+627.2,0.662866,0.661975
+865.7,0.588089,0.587073
+1194.9,0.500725,0.500512
+1649.3,0.406394,0.406464
+2276.5,0.31161,0.312116
+3142.2,0.224984,0.226428
+4337.1,0.155843,0.157193
+5986.4,0.109014,0.107752
+8262.9,0.0772273,0.075823
+11405.1,0.0564223,0.0554926
+15742.2,0.0400029,0.0407118
+21728.6,0.0276127,0.0280151
+29991.5,0.0247995,0
+41396.6,0.0140726,0
+57138.8,0.012091,0
+78867.4,0.00677736,0
+
+

@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample_1824.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ25“ú 15:20:22,
+Measurement Type,Particle Size,
+Sample Name,20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample,
+Scattering Angle,90,
+Temperature of the Holder,69.9,°C
+Dispersion Medium Viscosity,0.408,mPa·s
+Transmission Intensity before Meas.,23540,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,1552,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,1.00,
+Peak2 S.P.Area Ratio,---,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),1151.6,nm
+Peak2 Size (Mean),---,nm
+Peak3 Size (Mean),---,nm
+Total Mean,1151.6,nm
+Peak1 S. D.,325.7,nm
+Peak2 S. D.,---,nm
+Peak3 S. D.,---,nm
+Total S. D.,325.7,nm
+Peak1 Mode,1009.8,nm
+Peak2 Mode,---,nm
+Peak3 Mode,---,nm
+Total Mode,1009.8,nm
+Cumulant Operations,,
+Z-Average,1256.8,nm
+PI,0.378,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.992397,0.992704
+1.4,0.99035,0.99024
+1.9,0.988024,0.987583
+2.6,0.984358,0.984311
+3.6,0.98022,0.980124
+5,0.97456,0.974819
+6.9,0.968015,0.968363
+9.5,0.960414,0.960645
+13.1,0.951635,0.951661
+18.1,0.941692,0.94161
+25,0.931277,0.930818
+34.5,0.919852,0.919317
+47.6,0.90682,0.906497
+65.7,0.890792,0.890999
+90.7,0.870393,0.870967
+125.2,0.843694,0.844407
+172.8,0.808795,0.809286
+238.5,0.763349,0.763487
+329.2,0.705387,0.705008
+454.4,0.633437,0.632478
+627.2,0.547154,0.546007
+865.7,0.448733,0.448245
+1194.9,0.344941,0.34526
+1649.3,0.244886,0.246363
+2276.5,0.160174,0.161924
+3142.2,0.0988786,0.0993534
+4337.1,0.0612857,0.0596907
+5986.4,0.0394757,0.0379171
+8262.9,0.025551,0.0267554
+11405.1,0.0217981,0.0202254
+15742.2,0.0118714,0
+21728.6,0.0176982,0
+29991.5,0.0125267,0
+41396.6,0.00802149,0
+57138.8,0.00542642,0
+78867.4,0.00239896,0
+
+

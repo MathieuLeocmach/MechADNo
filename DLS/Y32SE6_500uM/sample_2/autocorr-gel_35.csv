@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample_1838.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ25“ú 16:38:02,
+Measurement Type,Particle Size,
+Sample Name,20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample,
+Scattering Angle,90,
+Temperature of the Holder,55.9,°C
+Dispersion Medium Viscosity,0.501,mPa·s
+Transmission Intensity before Meas.,23250,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,2593,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,0.24,
+Peak2 S.P.Area Ratio,0.76,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),112.6,nm
+Peak2 Size (Mean),6042.9,nm
+Peak3 Size (Mean),---,nm
+Total Mean,4640.7,nm
+Peak1 S. D.,10.2,nm
+Peak2 S. D.,865.5,nm
+Peak3 S. D.,---,nm
+Total S. D.,2630.8,nm
+Peak1 Mode,112.1,nm
+Peak2 Mode,6700.8,nm
+Peak3 Mode,---,nm
+Total Mode,6700.8,nm
+Cumulant Operations,,
+Z-Average,6814.9,nm
+PI,0.449,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.988762,0.988689
+1.4,0.98609,0.986406
+1.9,0.984406,0.983888
+2.6,0.98013,0.980558
+3.6,0.976277,0.976072
+5,0.970218,0.97027
+6.9,0.963157,0.963189
+9.5,0.954766,0.954761
+13.1,0.945166,0.945044
+18.1,0.934291,0.934407
+25,0.923514,0.923554
+34.5,0.913265,0.913234
+47.6,0.904103,0.90401
+65.7,0.896003,0.896032
+90.7,0.888905,0.88891
+125.2,0.881719,0.881864
+172.8,0.874156,0.874118
+238.5,0.865215,0.865045
+329.2,0.853981,0.853917
+454.4,0.8395,0.839703
+627.2,0.821016,0.821114
+865.7,0.796762,0.79673
+1194.9,0.765207,0.765007
+1649.3,0.72435,0.724235
+2276.5,0.672429,0.672589
+3142.2,0.608188,0.608397
+4337.1,0.530741,0.530783
+5986.4,0.441019,0.440756
+8262.9,0.342447,0.342419
+11405.1,0.244009,0.24354
+15742.2,0.153264,0.154475
+21728.6,0.0855048,0.084881
+29991.5,0.0394901,0.0393212
+41396.6,0.011294,0
+57138.8,0.0001,0
+78867.4,0.0001,0
+
+
