@@ -1,67 +1,67 @@
 Display Setting,Diameter
 
 Item,Value,Unit
-Y16SE#-1mM-NP500nm-0.1pct-cooling5_4436.nsz,,
+Y16SE8-1mM-NP500nm-0.1pct-cooling5_4516.nsz,,
 Measurement Results,,
-Date,2025”N4ŒŽ1“ú 12:28:31,
+Date,2025”N3ŒŽ31“ú 16:37:16,
 Measurement Type,Particle Size,
-Sample Name,Y16SE*-1mM-NP500nm-0.1pct-cooling5,
+Sample Name,Y16SE8-1mM-NP500nm-0.1pct-cooling5,
 Material,   ,
 Scattering Angle,90,
-Temperature of the Holder,52.0,°C
-Dispersion Medium Viscosity,0.532,mPa·s
-Transmission Intensity before Meas.,17612,
-Transmission Intensity after Meas.,17690,
+Temperature of the Holder,72.0,°C
+Dispersion Medium Viscosity,0.397,mPa·s
+Transmission Intensity before Meas.,17782,
+Transmission Intensity after Meas.,17877,
 Run Duration,120,Seconds
 Distribution Form,Standard,
 Distribution Form(Dispersity),Monodisperse,
 Representation of Result,Scattering Light Intensity,
-Count Rate,558,kCPS
-ACF Intercept,0.947,
+Count Rate,503,kCPS
+ACF Intercept,0.974,
 Calculation Results,,
 Cumulant Operations,,
-Z-Average,1829.6,nm
-PI,2.942,
+Z-Average,1698.2,nm
+PI,0.781,
 Molecular Weight Measurement,,
 Molecular Weight,---,
 Parameters for Molecular Weight Calculation,---,
 
 Delay Time       (µs),Correlation g1(T),Fitting Function g1(T)
-1,0.968476,0.968165
-2,0.965972,0.964326
-3,0.959272,0.959306
-4,0.951376,0.952432
-5,0.941054,0.943313
-6,0.929293,0.931815
-7,0.915347,0.91758
-8,0.898461,0.900408
-9,0.880148,0.880697
-10,0.861509,0.859782
-11,0.844181,0.839692
-12,0.828968,0.822748
-13,0.817367,0.810739
-14,0.80896,0.803924
-15,0.803007,0.800815
-16,0.797876,0.79931
-17,0.793575,0.797989
-18,0.790045,0.796276
-19,0.785763,0.793924
-20,0.78191,0.79069
-21,0.777477,0.786248
-22,0.772332,0.780158
-23,0.766496,0.771828
-24,0.759927,0.760478
-25,0.751579,0.745085
-26,0.74116,0.72435
-27,0.728309,0.696676
-28,0.711582,0
-29,0.690089,0
-30,0.661619,0
-31,0.623823,0
-32,0.57203,0
-33,0.506307,0
-34,0.427882,0
-35,0.31699,0
+1,0.985017,0.984883
+2,0.98243,0.982366
+3,0.979148,0.979233
+4,0.975199,0.975307
+5,0.97041,0.970536
+6,0.965184,0.964966
+7,0.958984,0.958554
+8,0.950736,0.951398
+9,0.94391,0.943851
+10,0.93657,0.936423
+11,0.929541,0.929405
+12,0.922556,0.922631
+13,0.915371,0.915483
+14,0.907192,0.907161
+15,0.896921,0.896901
+16,0.883904,0.883869
+17,0.866923,0.866932
+18,0.844589,0.844615
+19,0.815202,0.815195
+20,0.776852,0.776809
+21,0.727519,0.727604
+22,0.666053,0.666099
+23,0.592108,0.59185
+24,0.50617,0.506324
+25,0.413575,0.413693
+26,0.321059,0.320942
+27,0.238623,0
+28,0.184154,0
+29,0.160712,0
+30,0.129041,0
+31,0.133278,0
+32,0.132353,0
+33,0.0940009,0
+34,0.0569059,0
+35,0.0590572,0
 36,0.01,0
 
 

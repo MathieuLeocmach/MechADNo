@@ -1,67 +1,67 @@
 Display Setting,Diameter
 
 Item,Value,Unit
-Y16SE8-1mM-NP500nm-0.1pct-cooling5_4510.nsz,,
+Y16SE#-1mM-NP500nm-0.1pct-cooling5_4410.nsz,,
 Measurement Results,,
-Date,2025”N3ŒŽ31“ú 16:11:14,
+Date,2025”N4ŒŽ1“ú 10:52:49,
 Measurement Type,Particle Size,
-Sample Name,Y16SE8-1mM-NP500nm-0.1pct-cooling5,
+Sample Name,Y16SE*-1mM-NP500nm-0.1pct-cooling5,
 Material,   ,
 Scattering Angle,90,
-Temperature of the Holder,73.9,°C
-Dispersion Medium Viscosity,0.387,mPa·s
-Transmission Intensity before Meas.,18302,
-Transmission Intensity after Meas.,18261,
+Temperature of the Holder,57.9,°C
+Dispersion Medium Viscosity,0.486,mPa·s
+Transmission Intensity before Meas.,17441,
+Transmission Intensity after Meas.,17616,
 Run Duration,120,Seconds
 Distribution Form,Standard,
 Distribution Form(Dispersity),Monodisperse,
 Representation of Result,Scattering Light Intensity,
-Count Rate,952,kCPS
-ACF Intercept,0.982,
+Count Rate,695,kCPS
+ACF Intercept,0.959,
 Calculation Results,,
 Cumulant Operations,,
-Z-Average,1279.6,nm
-PI,0.211,
+Z-Average,3384.5,nm
+PI,4.524,
 Molecular Weight Measurement,,
 Molecular Weight,---,
 Parameters for Molecular Weight Calculation,---,
 
 Delay Time       (µs),Correlation g1(T),Fitting Function g1(T)
-1,0.989199,0.988733
-2,0.98725,0.986553
-3,0.984354,0.984395
-4,0.981111,0.981875
-5,0.976583,0.9787
-6,0.976221,0.974756
-7,0.974502,0.969914
-8,0.959139,0.964104
-9,0.957776,0.957399
-10,0.950409,0.950047
-11,0.942375,0.942261
-12,0.934443,0.933992
-13,0.924683,0.924704
-14,0.913465,0.913331
-15,0.898213,0.89846
-16,0.878247,0.878543
-17,0.851686,0.851894
-18,0.816655,0.816608
-19,0.770975,0.770614
-20,0.712276,0.711947
-21,0.639452,0.639285
-22,0.552851,0.552821
-23,0.454631,0.455375
-24,0.352077,0.353291
-25,0.258019,0.256229
-26,0.173527,0.174836
-27,0.119214,0.116383
-28,0.0818326,0
-29,0.0763218,0
-30,0.0716567,0
-31,0.0473041,0
-32,0.0794882,0
-33,0.0513494,0
-34,0.0365915,0
-35,0.0523566,0
+1,0.977601,0.97736
+2,0.973778,0.97453
+3,0.969855,0.970701
+4,0.964481,0.96549
+5,0.957365,0.958674
+6,0.949571,0.950249
+7,0.939924,0.940098
+8,0.929445,0.928299
+9,0.917669,0.91543
+10,0.906531,0.902694
+11,0.896104,0.891556
+12,0.887776,0.883248
+13,0.881253,0.878172
+14,0.876625,0.875621
+15,0.872616,0.874279
+16,0.86955,0.873097
+17,0.866376,0.87158
+18,0.862889,0.869498
+19,0.859243,0.866634
+20,0.855366,0.862696
+21,0.850696,0.857289
+22,0.844652,0.849883
+23,0.837049,0.839765
+24,0.827557,0.825997
+25,0.815311,0.807365
+26,0.799277,0.782336
+27,0.778276,0.74906
+28,0.751679,0
+29,0.717627,0
+30,0.673403,0
+31,0.616263,0
+32,0.540594,0
+33,0.439742,0
+34,0.319603,0
+35,0.174768,0
 36,0.01,0
 
 
