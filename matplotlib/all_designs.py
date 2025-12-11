@@ -192,10 +192,14 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
             goodt[np.where((alpha[5:]<=0) | (alpha[5:]>1))[0][0]+5:] = False
         M = np.argmax(alpha[goodt])
         m = np.argmin(alpha[goodt][:M])
+        #if m<1: continue
         #print(m, M)
         #convert from slope to tan delta (locally a power-law fluid)
         mintandelta.append([T, np.tan(np.pi/2*alpha[goodt][m])])
     mintandelta = np.array(mintandelta)
+
+    #remove very high temperature regime where there is no maximum
+    mintandelta = mintandelta[np.argmax(mintandelta[:,1]):]
 
     #Load simulation results of NS melting
     meltingSE0 = read_csv(f'../simulations/melting_Y{Y}SE0/Y{Y}SE0_{C_NS:.1f}uM_complexes_concentration_melting-1.tsv', sep='\t').rename(columns={'# temperature':'T'})
