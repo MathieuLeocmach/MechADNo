@@ -5,6 +5,7 @@ from scipy.interpolate import CubicSpline
 from scipy.ndimage import gaussian_filter1d
 from pandas import read_csv
 import matplotlib.pyplot as plt
+from matplotlib import color_sequences
 
 q = 23e6 #m-1
 a = 0.255e-6 #m
@@ -161,7 +162,11 @@ axs[0].set_yscale('log')
 for ax in axs:
     ax.axhline(1, ls='--', color='k')
 
-for Y, SE, C_NS in [(16, 4, 600), (16, 4, 800), (16, 4, 1000), (16, 6, 500), (16, 6, 1000), (16, 8, 1000), (32, 6, 500)]:
+marks = {16:'.', 32:'*'}
+#colors = to_rgba_array(plt.rcParams['axes.prop_cycle'].by_key()['color'])
+#SE2col = {4:colors[0], 6:colors[1], 8:colors[2]}
+
+for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), (16, 6, 500,6), (16, 6, 1000, 4), (16, 8, 1000,8), (32, 6, 500, 6)]:
     measurements = load_DLS(os.path.dirname('.'), Y=Y, SE=SE, c=C_NS)
 
     #average g2 across coolings and repeats, taking count rates into account, but discarding low intercepts
@@ -187,7 +192,7 @@ for Y, SE, C_NS in [(16, 4, 600), (16, 4, 800), (16, 4, 1000), (16, 6, 500), (16
             goodt[np.where((alpha[5:]<=0) | (alpha[5:]>1))[0][0]+5:] = False
         M = np.argmax(alpha[goodt])
         m = np.argmin(alpha[goodt][:M])
-        print(m, M)
+        #print(m, M)
         #convert from slope to tan delta (locally a power-law fluid)
         mintandelta.append([T, np.tan(np.pi/2*alpha[goodt][m])])
     mintandelta = np.array(mintandelta)
@@ -199,10 +204,11 @@ for Y, SE, C_NS in [(16, 4, 600), (16, 4, 800), (16, 4, 1000), (16, 6, 500), (16
     pSEdata = read_csv(f'../simulations/melting_SE{SE}/SE{SE}_{int(np.ceil(C_NS*3)):d}uM_complexes_concentration_melting-1.tsv', sep='\t').rename(columns={'# temperature':'T'})
     pSE = CubicSpline(pSEdata['T'], pSEdata['SE+SE']/(1.5*C_NS*1e-6))
 
+    color = color_sequences['tab20c'][icolor]
     line = axs[0].plot(
         pSE(mintandelta[:,0]),
         mintandelta[:,1],
-        ls='none', marker='.',
+        ls='none', marker=marks[Y], color = color,
         label=f'Y{Y}SE{SE} {C_NS: >4d} µM'
         )[0]
     axs[1].plot(
@@ -212,7 +218,7 @@ for Y, SE, C_NS in [(16, 4, 600), (16, 4, 800), (16, 4, 1000), (16, 6, 500), (16
             SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=40
             ),
         mintandelta[:,1],
-        ls='none', marker='.', color=line.get_color(),
+        ls='none', marker=marks[Y], color=line.get_color(),
         #label=f'Y{Y}SE{SE} {C_NS: >4d} µM'
         )
 
