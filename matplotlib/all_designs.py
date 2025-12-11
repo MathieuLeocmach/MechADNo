@@ -150,7 +150,7 @@ def phi_rotating_assembled_only_saturated(pSE, pNS=1, SE=6, C_0=1e-3, Y=16, pers
     #At small pSE, doublet is the only relevant cluster,
     # thus the concentration of doublet is half the concentration of assembled nanostar
     # that are assembled
-    return (V_rotating/2 * 3 * pSE * (1-pSE)**2 * pNS**2) *1e-9**3 * C_0*1e3 *const.Avogadro
+    return (V_rotating/2 * 3 * pSE * (1-pSE)**2 * pNS) *1e-9**3 * C_0*1e3 *const.Avogadro
 
 
 fig, axs = plt.subplots(1,2, figsize=(7.3,3), sharey=True, layout='constrained')
@@ -223,7 +223,7 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
         )
 
 axs[1].set_xlim(0,1.5)
-axs[1].axvline(0.58, ls='--', color='k')
+axs[1].axvline(0.58, ls=':', color='k')
 fig.legend(loc='outside right upper')
 for ext in ['png', 'pdf']:
     plt.savefig(f'all_designs.{ext}')
