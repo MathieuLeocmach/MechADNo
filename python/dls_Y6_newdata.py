@@ -15,6 +15,10 @@ from scipy.optimize import curve_fit
 from scipy.interpolate import CubicSpline
 from uncertainties import ufloat, unumpy
 import uncertainties
+import matplotlib as mpl
+mpl.rcdefaults()
+plt.style.use(['plt-style-2.mplstyle', 'tableau-colorblind10'])
+# plt.style.use(['tableau-colorblind10'])
 
 q = 23e6 #m-1
 a = 0.255e-6 #m
@@ -155,7 +159,7 @@ if __name__ == '__main__':
     
     #draw J(t)
     taus, Gis, etas = [], [], []
-    fig = plt.figure(figsize=(7.3,7.3), constrained_layout=True)
+    fig = plt.figure(figsize=(89.7/25.4, 89.7/25.4), constrained_layout=True)
     gs = gridspec.GridSpec(6, 2, figure=fig)#, hspace=0.8, wspace=0.5)
     axs = [None, None]
     axs[0] = fig.add_subplot(gs[0:3, 0])
@@ -241,7 +245,7 @@ if __name__ == '__main__':
         ax.set_yscale('log')
         ax.legend(title=f'Y16SE{SE}')
     # fig.suptitle('Y16SE6_1mM_newdata')
-    axs[0].text(1e-7, 5e0, 'A', color='black', fontsize=14)
+    axs[0].text(1e-7, 5e0, 'A', color='black', fontsize=10)
     plt.setp(axs[0].get_xticklabels(), visible=False)
     ax2 = [None, None, None]
     ax2[0] = fig.add_subplot(gs[0:2, 1])   
@@ -262,14 +266,14 @@ if __name__ == '__main__':
     ax2[2].set_ylabel(r'$\tau$ (s)')
     ax2[1].legend()
     # fig2.suptitle('Y16SE6_1mM_newdata')
-    ax2[0].text(48, 26, 'B', color='black', fontsize=14)
+    ax2[0].text(48, 26, 'B', color='black', fontsize=10)
     plt.setp(ax2[0].get_xticklabels(), visible=False)
     plt.setp(ax2[1].get_xticklabels(), visible=False)
     # np.savetxt('params_Y16SE6_newdata.tsv', 
     #         np.array([range(75,55,-1),Gis, taus]),
     #         delimiter=',', fmt='%.4e', header='T(C),Gi(Pa),tau(s)')
     
-    # for ext in ['png', 'pdf']:
-    #     # fig.savefig(f'J_Y16SE0_Y16SE6_newdata.{ext}')
-    #     # fig2.savefig(f'Gi_tau_Y16SE6_newdata.{ext}')
-    #     fig.savefig(rf'C:\Users\ajiye\Documents\Redaction\paper dna gels\figures\DLS_Y16SE6_newdata.{ext}')
+    for ext in ['png', 'pdf']:
+        # fig.savefig(f'J_Y16SE0_Y16SE6_newdata.{ext}')
+        # fig2.savefig(f'Gi_tau_Y16SE6_newdata.{ext}')
+        fig.savefig(rf'C:\Users\ajiye\Documents\Redaction\paper dna gels\figures\DLS_Y16SE6_newdata_colourblind.{ext}')
