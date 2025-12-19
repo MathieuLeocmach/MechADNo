@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample_1834.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ25“ú 16:15:48,
+Measurement Type,Particle Size,
+Sample Name,20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample,
+Scattering Angle,90,
+Temperature of the Holder,60.0,°C
+Dispersion Medium Viscosity,0.471,mPa·s
+Transmission Intensity before Meas.,23222,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,1319,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,1.00,
+Peak2 S.P.Area Ratio,---,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),3839.5,nm
+Peak2 Size (Mean),---,nm
+Peak3 Size (Mean),---,nm
+Total Mean,3839.5,nm
+Peak1 S. D.,1517.6,nm
+Peak2 S. D.,---,nm
+Peak3 S. D.,---,nm
+Total S. D.,1517.6,nm
+Peak1 Mode,3400.0,nm
+Peak2 Mode,---,nm
+Peak3 Mode,---,nm
+Total Mode,3400.0,nm
+Cumulant Operations,,
+Z-Average,4379.9,nm
+PI,0.407,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.990616,0.990661
+1.4,0.988453,0.988344
+1.9,0.985659,0.985721
+2.6,0.982389,0.982377
+3.6,0.977925,0.978016
+5,0.972568,0.97247
+6.9,0.965816,0.965747
+9.5,0.957636,0.957786
+13.1,0.948691,0.948682
+18.1,0.938861,0.938841
+25,0.929099,0.928956
+34.5,0.919616,0.91963
+47.6,0.910923,0.91107
+65.7,0.902837,0.902965
+90.7,0.894762,0.89467
+125.2,0.885686,0.885486
+172.8,0.874739,0.874648
+238.5,0.860975,0.861093
+329.2,0.843235,0.843417
+454.4,0.819897,0.820038
+627.2,0.789285,0.789282
+865.7,0.749668,0.749391
+1194.9,0.698966,0.698643
+1649.3,0.635785,0.63567
+2276.5,0.559767,0.560032
+3142.2,0.471822,0.473031
+4337.1,0.378375,0.378604
+5986.4,0.285279,0.283706
+8262.9,0.199679,0.197216
+11405.1,0.124609,0.127025
+15742.2,0.0731027,0.0766741
+21728.6,0.0453045,0.0441879
+29991.5,0.0277158,0.0243279
+41396.6,0.0172162,0
+57138.8,0.011921,0
+78867.4,0.0001,0
+
+

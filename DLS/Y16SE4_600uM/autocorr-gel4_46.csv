@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230105-gelyse4-600um-pscooh-500nm-0.1pct_1232.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ6“ú 3:03:02,
+Measurement Type,Particle Size,
+Sample Name,20230105-gelyse4-600um-pscooh-500nm-0.1pct,
+Scattering Angle,90,
+Temperature of the Holder,45.0,°C
+Dispersion Medium Viscosity,0.599,mPa·s
+Transmission Intensity before Meas.,20898,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,1134,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,0.46,
+Peak2 S.P.Area Ratio,0.54,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),134.5,nm
+Peak2 Size (Mean),6144.8,nm
+Peak3 Size (Mean),---,nm
+Total Mean,3383.5,nm
+Peak1 S. D.,15.5,nm
+Peak2 S. D.,834.2,nm
+Peak3 S. D.,---,nm
+Total S. D.,3057.4,nm
+Peak1 Mode,130.2,nm
+Peak2 Mode,6727.6,nm
+Peak3 Mode,---,nm
+Total Mode,6727.6,nm
+Cumulant Operations,,
+Z-Average,6949.0,nm
+PI,0.539,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.9941,0.994104
+1.4,0.993032,0.993065
+1.9,0.991728,0.991789
+2.6,0.990214,0.990047
+3.6,0.987714,0.98764
+5,0.984297,0.984425
+6.9,0.980256,0.980325
+9.5,0.975115,0.975153
+13.1,0.968733,0.968709
+18.1,0.960999,0.960889
+25,0.951799,0.951763
+34.5,0.941465,0.941499
+47.6,0.930319,0.930344
+65.7,0.918574,0.918656
+90.7,0.906884,0.906887
+125.2,0.895413,0.89538
+172.8,0.884145,0.884066
+238.5,0.872423,0.872363
+329.2,0.859391,0.859415
+454.4,0.844155,0.84436
+627.2,0.826249,0.826301
+865.7,0.804345,0.804184
+1194.9,0.776992,0.776757
+1649.3,0.742433,0.742466
+2276.5,0.699119,0.699425
+3142.2,0.645577,0.645774
+4337.1,0.580559,0.580392
+5986.4,0.504232,0.503661
+8262.9,0.417809,0.418035
+11405.1,0.327964,0.328213
+15742.2,0.240122,0.240554
+21728.6,0.162019,0.161688
+29991.5,0.0976023,0.0969715
+41396.6,0.0496232,0.0496202
+57138.8,0.0191575,0.0202145
+78867.4,0.00409512,0
+
+

@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample_1839.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ25“ú 16:43:34,
+Measurement Type,Particle Size,
+Sample Name,20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample,
+Scattering Angle,90,
+Temperature of the Holder,54.9,°C
+Dispersion Medium Viscosity,0.508,mPa·s
+Transmission Intensity before Meas.,22879,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,754,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,0.25,
+Peak2 S.P.Area Ratio,0.75,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),1.5,nm
+Peak2 Size (Mean),258.9,nm
+Peak3 Size (Mean),---,nm
+Total Mean,193.6,nm
+Peak1 S. D.,0.2,nm
+Peak2 S. D.,25.8,nm
+Peak3 S. D.,---,nm
+Total S. D.,114.3,nm
+Peak1 Mode,1.4,nm
+Peak2 Mode,259.4,nm
+Peak3 Mode,---,nm
+Total Mode,259.4,nm
+Cumulant Operations,,
+Z-Average,7554.1,nm
+PI,0.718,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.990808,0.990924
+1.4,0.989134,0.989027
+1.9,0.986844,0.986763
+2.6,0.983799,0.983769
+3.6,0.979706,0.979789
+5,0.974664,0.9747
+6.9,0.968538,0.968509
+9.5,0.961097,0.961103
+13.1,0.952257,0.952459
+18.1,0.942911,0.942867
+25,0.933178,0.933002
+34.5,0.923948,0.923666
+47.6,0.915515,0.915462
+65.7,0.908185,0.908467
+90.7,0.901716,0.902147
+125.2,0.895504,0.895711
+172.8,0.888839,0.888572
+238.5,0.880829,0.880353
+329.2,0.870977,0.870543
+454.4,0.858189,0.858233
+627.2,0.841809,0.842138
+865.7,0.820217,0.820751
+1194.9,0.792162,0.792438
+1649.3,0.755337,0.755469
+2276.5,0.708275,0.708154
+3142.2,0.649698,0.649195
+4337.1,0.579318,0.578265
+5986.4,0.497068,0.496709
+8262.9,0.407933,0.408091
+11405.1,0.317238,0.318074
+15742.2,0.229833,0.233252
+21728.6,0.158457,0.159226
+29991.5,0.105288,0.0992021
+41396.6,0.0644829,0
+57138.8,0.0311499,0
+78867.4,0.00569638,0
+
+

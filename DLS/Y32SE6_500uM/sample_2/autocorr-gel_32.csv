@@ -1,0 +1,79 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample_1835.nsz,,
+Measurement Results,,
+Date,2023”N1ŒŽ25“ú 16:21:21,
+Measurement Type,Particle Size,
+Sample Name,20230125-gely32se6-500uM-pscooh-500nm-0.1pct-oldsample,
+Scattering Angle,90,
+Temperature of the Holder,59.0,°C
+Dispersion Medium Viscosity,0.478,mPa·s
+Transmission Intensity before Meas.,22638,
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,1051,kCPS
+Calculation Results,,
+Peak1 S.P.Area Ratio,1.00,
+Peak2 S.P.Area Ratio,---,
+Peak3 S.P.Area Ratio,---,
+Total Area Ratio,1.00,
+Peak1 Size (Mean),3853.0,nm
+Peak2 Size (Mean),---,nm
+Peak3 Size (Mean),---,nm
+Total Mean,3853.0,nm
+Peak1 S. D.,1557.3,nm
+Peak2 S. D.,---,nm
+Peak3 S. D.,---,nm
+Total S. D.,1557.3,nm
+Peak1 Mode,3402.1,nm
+Peak2 Mode,---,nm
+Peak3 Mode,---,nm
+Total Mode,3402.1,nm
+Cumulant Operations,,
+Z-Average,4578.1,nm
+PI,0.608,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation,Fitting Function
+1,0.992815,0.992809
+1.4,0.990709,0.990717
+1.9,0.988091,0.98832
+2.6,0.985723,0.985264
+3.6,0.981269,0.981323
+5,0.976085,0.976369
+6.9,0.970417,0.970389
+9.5,0.963281,0.963267
+13.1,0.954997,0.955022
+18.1,0.946074,0.945981
+25,0.936893,0.936788
+34.5,0.928212,0.928089
+47.6,0.920127,0.920207
+65.7,0.91263,0.912896
+90.7,0.905163,0.905425
+125.2,0.89703,0.896962
+172.8,0.88712,0.886834
+238.5,0.874751,0.874331
+329.2,0.858576,0.858392
+454.4,0.837245,0.837532
+627.2,0.809472,0.809966
+865.7,0.773309,0.773781
+1194.9,0.726922,0.727068
+1649.3,0.668651,0.668217
+2276.5,0.597735,0.596479
+3142.2,0.513489,0.512786
+4337.1,0.419349,0.420593
+5986.4,0.324713,0.326206
+8262.9,0.237679,0.237854
+11405.1,0.164618,0.163189
+15742.2,0.107185,0.106235
+21728.6,0.0650944,0.0660883
+29991.5,0.0449838,0
+41396.6,0.0212641,0
+57138.8,0.00647449,0
+78867.4,0.00526139,0
+
+
