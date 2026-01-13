@@ -1,0 +1,67 @@
+Display Setting,Diameter
+
+Item,Value,Unit
+Y32SE6-500uM-NP500nm-0.1pct-cooling5_7138.nsz,,
+Measurement Results,,
+Date,2025”N12ŒŽ25“ú 15:09:35,
+Measurement Type,Particle Size,
+Sample Name,Y32SE6-500uM-NP500nm-0.1pct-cooling5,
+Material,   ,
+Scattering Angle,90,
+Temperature of the Holder,68.0,°C
+Dispersion Medium Viscosity,0.419,mPa·s
+Transmission Intensity before Meas.,17144,
+Transmission Intensity after Meas.,17101,
+Run Duration,120,Seconds
+Distribution Form,Standard,
+Distribution Form(Dispersity),Monodisperse,
+Representation of Result,Scattering Light Intensity,
+Count Rate,240,kCPS
+ACF Intercept,0.942,
+Calculation Results,,
+Cumulant Operations,,
+Z-Average,5262.4,nm
+PI,1.704,
+Molecular Weight Measurement,,
+Molecular Weight,---,
+Parameters for Molecular Weight Calculation,---,
+
+Delay Time       (µs),Correlation g1(T),Fitting Function g1(T)
+1,0.968163,0.966569
+2,0.963705,0.962304
+3,0.957394,0.957253
+4,0.95021,0.950614
+5,0.940996,0.942177
+6,0.930815,0.932137
+7,0.920048,0.920641
+8,0.908792,0.908165
+9,0.896279,0.895748
+10,0.8864,0.884821
+11,0.878261,0.876486
+12,0.871648,0.870929
+13,0.866728,0.867285
+14,0.862391,0.864191
+15,0.858519,0.860567
+16,0.853773,0.855813
+17,0.848367,0.849546
+18,0.841547,0.841405
+19,0.832593,0.831048
+20,0.821123,0.818224
+21,0.806602,0.802852
+22,0.788316,0.785084
+23,0.767246,0.765222
+24,0.742943,0.743393
+25,0.713054,0.719008
+26,0.677328,0.690343
+27,0.644369,0.65473
+28,0.608864,0.609346
+29,0.561605,0.551997
+30,0.514551,0.481625
+31,0.46556,0
+32,0.398744,0
+33,0.306029,0
+34,0.267535,0
+35,0.169723,0
+36,0.01,0
+
+
