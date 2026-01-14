@@ -153,7 +153,7 @@ def phi_rotating_assembled_only_saturated(pSE, pNS=1, SE=6, C_0=1e-3, Y=16, pers
     return (V_rotating/2 * 3 * pSE * (1-pSE)**2 * pNS) *1e-9**3 * C_0*1e3 *const.Avogadro
 
 
-fig, axs = plt.subplots(1,2, figsize=(7.3,3), sharey=True, layout='constrained')
+fig, axs = plt.subplots(1,2, figsize=(3.5,3), sharey=True, layout='constrained')
 axs[0].set_ylabel(r'$\tan\delta_\min$')
 axs[0].set_xlabel(r'$p_\mathrm{SE}$')
 axs[1].set_xlabel(r'$\phi_\mathrm{2,rot}$')
@@ -227,7 +227,13 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
         )
 
 axs[1].set_xlim(0,1.5)
+axs[1].set_xticks(np.arange(0,1.5,0.5))
 axs[1].axvline(0.58, ls=':', color='k')
-fig.legend(loc='outside right upper')
+handles, labels = axs[0].get_legend_handles_labels()
+r = plt.Rectangle((0,0), 1, 1, fill=False, edgecolor='none', visible=False)
+handles.insert(3, r)
+labels.insert(3,'')
+fig.legend(handles, labels, loc='outside upper right', fontsize='small', ncols=2)
+fig.get_layout_engine().set(wspace=0, w_pad=0)
 for ext in ['png', 'pdf']:
     plt.savefig(f'all_designs.{ext}')
