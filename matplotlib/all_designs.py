@@ -153,6 +153,10 @@ def phi_rotating_assembled_only_saturated(pSE, pNS=1, SE=6, C_0=1e-3, Y=16, pers
     return (V_rotating/2 * 3 * pSE * (1-pSE)**2 * pNS) *1e-9**3 * C_0*1e3 *const.Avogadro
 
 
+def majority_doublet(p):
+    """Given the probablity of sticky end bonds, is the concentration of doublets larger than the concentration of 2 or 3-bonded nanostars ?"""
+    return 0.5*3*p*(1-p)**2 > 3* p**2 * (1-p) + p**3
+
 fig, axs = plt.subplots(1,2, figsize=(3.5,3), sharey=True, layout='constrained')
 axs[0].set_ylabel(r'$\tan\delta_\min$')
 axs[0].set_xlabel(r'$p_\mathrm{SE}$')
@@ -209,21 +213,38 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
     pSE = CubicSpline(pSEdata['T'], pSEdata['SE+SE']/(1.5*C_NS*1e-6))
 
     color = color_sequences['tab20c'][icolor]
-    line = axs[0].plot(
-        pSE(mintandelta[:,0]),
-        mintandelta[:,1],
+    good = majority_doublet(pSE(mintandelta[:,0]))
+    axs[0].plot(
+        pSE(mintandelta[good,0]),
+        mintandelta[good,1],
         ls='none', marker=marks[Y], color = color,
         label=f'Y{Y}SE{SE} {C_NS: >4d} µM'
-        )[0]
+    )
+    axs[0].plot(
+        pSE(mintandelta[~good,0]),
+        mintandelta[~good,1],
+        ls='none', marker=marks[Y], color = color, mfc='none',
+        #label=f'Y{Y}SE{SE} {C_NS: >4d} µM'
+    )
+    
     axs[1].plot(
         phi_rotating_assembled_only_saturated(
-            pSE(mintandelta[:,0]),
-            pNS(mintandelta[:,0]),
+            pSE(mintandelta[good,0]),
+            pNS(mintandelta[good,0]),
             SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=40
             ),
-        mintandelta[:,1],
-        ls='none', marker=marks[Y], color=line.get_color(),
+        mintandelta[good,1],
+        ls='none', marker=marks[Y], color=color,
         #label=f'Y{Y}SE{SE} {C_NS: >4d} µM'
+        )
+    axs[1].plot(
+        phi_rotating_assembled_only_saturated(
+            pSE(mintandelta[~good,0]),
+            pNS(mintandelta[~good,0]),
+            SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=40
+            ),
+        mintandelta[~good,1],
+        ls='none', marker=marks[Y], color=color, mfc='none',
         )
 
 axs[1].set_xlim(0,1.5)
