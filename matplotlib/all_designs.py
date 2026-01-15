@@ -6,6 +6,7 @@ from scipy.ndimage import gaussian_filter1d
 from pandas import read_csv
 import matplotlib.pyplot as plt
 from matplotlib import color_sequences
+from matplotlib.gridspec import GridSpec
 
 q = 23e6 #m-1
 a = 0.255e-6 #m
@@ -157,7 +158,55 @@ def majority_doublet(p):
     """Given the probablity of sticky end bonds, is the concentration of doublets larger than the concentration of 2 or 3-bonded nanostars ?"""
     return 0.5*3*p*(1-p)**2 > 3* p**2 * (1-p) + p**3
 
-fig, axs = plt.subplots(1,2, figsize=(3.5,3), sharey=True, layout='constrained')
+fig = plt.figure(figsize=(7.3,2), layout="constrained")
+gs = GridSpec(1, 3, figure=fig)
+ax0 = fig.add_subplot(gs[0, 0])
+ax1 = fig.add_subplot(gs[0, 1])
+ax2 = fig.add_subplot(gs[0, 2], sharey=ax1)
+axs = [ax1, ax2]
+for ax in axs[1:]:
+    plt.setp(ax.get_yticklabels(), visible=False)
+
+ax0.set_ylabel(r'$\tan\delta$')
+ax0.set_xlabel(r'$\Delta t$ (s)')
+ax0.set_yscale('log')
+ax0.set_xscale('log')
+
+measurements = load_DLS(os.path.dirname('.'), Y=16, SE=6, c=1000)
+#average g2 across coolings and repeats, taking count rates into account, but discarding low intercepts
+good = measurements['g1'][...,0] > 1-4e-3
+meang2s = np.sum((good * measurements['count'])[...,None] * (1 + measurements['g1']**2), axis=(0,2)) / np.maximum(1, (good * measurements['count']).sum((0,2)))[...,None]
+meang1s = np.sqrt(meang2s -1)
+Ts = np.rint(measurements['T'].mean((0,2))).astype(int)
+
+for T,ma, color, (x,y) in zip(
+    [75,70,65,60,55], '^osv.', 
+    ['#006BA4', '#FF800E', '#ABABAB', '#595959', '#5F9ED1', '#C85200', '#898989', '#A2C8EC', '#FFBC79', '#CFCFCF'],
+    [(4e-5, 30), (2e-3, 20), (4e-4, 5.5), (1e-3, 3), (3e-3, 0.7)]
+):
+    iT = np.argmin(np.abs(Ts - T))
+    g1 = meang1s[iT]
+    err_f = 1-g1[0]
+    J = f2J(g1, T=T, q=q, a=a) #Pa-1
+    err_minus_J = np.maximum(0, J - f2J(g1 + err_f, T, q, a))
+    err_plus_J = f2J(np.maximum(0, g1 - err_f), T, q, a) - J
+    alpha = np.gradient(np.log(J))/np.gradient(np.log(Dts))
+    goodt = (g1>0.2)
+    if np.any((alpha<=0) | (alpha>1)):
+        goodt[np.where((alpha<=0) | (alpha>1))[0][0]:] = False
+    m = np.argmin(alpha[goodt])
+    M = m + np.argmax(alpha[goodt][m:])
+    goodt[M:] = False
+    ax0.plot(
+        Dts[goodt], np.tan(np.pi/2*alpha)[goodt],
+        color=color,
+        #marker=ma, mfc='none',
+        #label=f'{T:d}°C'
+    )
+    ax0.text(x, y, f'{T:d}°C', color=color, size='small')
+#ax0.legend(fontsize='small')
+
+#fig, axs = plt.subplots(1,3, figsize=(7.3,2), sharey=True, layout='constrained')
 axs[0].set_ylabel(r'$\tan\delta_\min$')
 axs[0].set_xlabel(r'$p_\mathrm{SE}$')
 axs[1].set_xlabel(r'$\phi_\mathrm{2,rot}$')
@@ -199,7 +248,7 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
         #if m<1: continue
         #print(m, M)
         #convert from slope to tan delta (locally a power-law fluid)
-        mintandelta.append([T, np.tan(np.pi/2*alpha[goodt][m])])
+        mintandelta.append([T, np.tan(np.pi/2*alpha[goodt][m]), Dts[goodt][m]])
     mintandelta = np.array(mintandelta)
 
     #remove very high temperature regime where there is no maximum
@@ -246,15 +295,22 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
         mintandelta[~good,1],
         ls='none', marker=marks[Y], color=color, mfc='none',
         )
+    if Y==16 and SE==6 and C_NS==1000:
+        ax0.plot(
+            *mintandelta[1:-5:5,[2,1]].T,
+            ls='none', marker=marks[Y], color=color,
+        )
+            
 
 axs[1].set_xlim(0,1.5)
 axs[1].set_xticks(np.arange(0,1.5,0.5))
 axs[1].axvline(0.58, ls=':', color='k')
-handles, labels = axs[0].get_legend_handles_labels()
-r = plt.Rectangle((0,0), 1, 1, fill=False, edgecolor='none', visible=False)
-handles.insert(3, r)
-labels.insert(3,'')
-fig.legend(handles, labels, loc='outside upper right', fontsize='small', ncols=2)
-fig.get_layout_engine().set(wspace=0, w_pad=0)
+#handles, labels = axs[0].get_legend_handles_labels()
+#r = plt.Rectangle((0,0), 1, 1, fill=False, edgecolor='none', visible=False)
+#handles.insert(3, r)
+#labels.insert(3,'')
+#fig.legend(handles, labels, loc='outside upper right', fontsize='small', ncols=2)
+#fig.get_layout_engine().set(wspace=0, w_pad=0)
+fig.legend(loc='outside right upper', fontsize='small')
 for ext in ['png', 'pdf']:
     plt.savefig(f'all_designs.{ext}')
