@@ -123,14 +123,17 @@ def load_DLS(rootdir, SE=6, Y=16, c=1000):
             ]
         return np.reshape(measurements, (1, len(measurements[0]), 1))
     elif c==500 and SE==6 and Y==32:
-        measurements = [
-            load_variable(
-                os.path.join(rootdir, f'../DLS/Y{Y}SE{SE}_{c}uM/sample_{i+1}'),
-                re.compile('autocorr-gel.*_([0-9]*).csv')
-            )
-            for i in range(2)
-        ]
-        return np.reshape(measurements, (2, len(measurements[0]), 1))
+        dirfile = os.path.join(rootdir, f'../DLS/Y{Y}SE{SE}_500uM/12-2025/')
+        Ncooling = 5
+        Nrepeat = 5
+        Ntemperature = 36
+        middle_name = '500uM-NP500nm-0.1pct-cooling'
+        measurements = []
+        #load all measurements, but not the first cooling that has a strange behaviour
+        for c in range(1, Ncooling):
+            name = f"cooling_{c+1}/Y{Y}SE{SE}-{middle_name}{c+1}_{{:03d}}.csv"
+            measurements.append(load_and_sort(os.path.join(dirfile, name)))
+        return np.reshape(measurements, (Ncooling-1, Ntemperature, Nrepeat))
 
 def phi_rotating_assembled_only_saturated(pSE, pNS=1, SE=6, C_0=1e-3, Y=16, persistence=50):
     """Packing fraction of freely rotating doublets of assembled NS. Valid only at small pSE.
