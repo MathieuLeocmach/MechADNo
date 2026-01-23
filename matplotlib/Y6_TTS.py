@@ -264,9 +264,9 @@ for label in axs[-1,1].xaxis.get_ticklabels()[1::2]:
 
 
 handles, labels = axs[1,0].get_legend_handles_labels()
-fig.legend(handles, labels, loc='outside upper center', ncol=3)
+fig.legend(handles, labels, loc='outside upper center', ncol=3, borderaxespad=0.01)
 fig.get_layout_engine().set(wspace=0, w_pad=0, hspace=0, h_pad=0.01)
 fig.align_ylabels()
 
-for ex in ["png", "pdf"]:
-    fig.savefig(f'Y6-TTS-22012025-colourblind.{ex}', bbox_inches='tight', pad_inches=0.2)
+for ext in ["png", "pdf"]:
+    fig.savefig(f'Y6-TTS-22012025-colourblind.{ext}', bbox_inches='tight')
