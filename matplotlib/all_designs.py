@@ -185,7 +185,7 @@ Ts = np.rint(measurements['T'].mean((0,2))).astype(int)
 for T,ma, color, (x,y) in zip(
     [75,70,65,60,55], '^osv.', 
     ['#006BA4', '#FF800E', '#ABABAB', '#595959', '#5F9ED1', '#C85200', '#898989', '#A2C8EC', '#FFBC79', '#CFCFCF'],
-    [(4e-5, 30), (2e-3, 20), (4e-4, 5.5), (1e-3, 3), (3e-3, 0.7)]
+    [(4e-5, 30), (2e-3, 17), (4e-4, 5.5), (1e-3, 3), (3e-3, 0.6)]
 ):
     iT = np.argmin(np.abs(Ts - T))
     g1 = meang1s[iT]
@@ -215,8 +215,9 @@ axs[0].set_xlabel(r'$p_\mathrm{SE}$')
 axs[1].set_xlabel(r'$\phi_\mathrm{2,rot}$')
 axs[0].set_yscale('log')
 #axs[1].set_xscale('log')
-for ax in axs:
+for ax, label in zip([ax0, ax1, ax2], 'abc'):
     ax.axhline(1, ls='--', color='k')
+    ax.text(0.98, 0.98, f'({label})', ha='right', va='top', transform=ax.transAxes)
 
 marks = {16:'.', 32:'*'}
 #colors = to_rgba_array(plt.rcParams['axes.prop_cycle'].by_key()['color'])
@@ -315,5 +316,6 @@ axs[1].axvline(0.58, ls=':', color='k')
 #fig.legend(handles, labels, loc='outside upper right', fontsize='small', ncols=2)
 #fig.get_layout_engine().set(wspace=0, w_pad=0)
 fig.legend(loc='outside right upper', fontsize='small')
+
 for ext in ['png', 'pdf']:
     plt.savefig(f'all_designs.{ext}')
