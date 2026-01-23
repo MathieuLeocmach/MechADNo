@@ -1,47 +1,47 @@
-\begin{tikzpicture}
+﻿\begin{tikzpicture}
   \begin{axis}[
     name=phasediag,
-    width=0.8\columnwidth,
+    width=0.75\columnwidth,
     height=0.7\columnwidth,
-    xlabel={\textbf{$\phi_\mathrm{NS}=C_\mathrm{NS}/C_\mathrm{ov}$}},
-    ylabel={\textbf{$T$ ($^\circ$C)}},
+    xlabel={$\phi_\mathrm{NS}=C_\mathrm{NS}/C_\mathrm{ov}$},
+    ylabel={$T$ ($^\circ$C)},
     xmin=0, xmax=1.2,
     ymin=0, ymax=100,
-    tick label style={font=\large},
-    label style={font=\Large},
-    major tick length=5pt,
+    %tick label style={font=\large},
+    %label style={font=\Large},
+    %major tick length=5pt,
     clip=true,
   ]    
 
     \addplot[ultra thick, BurntOrange, no marks]
       table[x expr=\thisrowno{0}/1.5/1015, y index=3]
       {simulations/mfold_SE6_concentration.tsv};
-    \node[BurntOrange, anchor=base east] at (axis cs:0.9,60)
-      {\textbf{non-percolated nanostars}};
+    \node[BurntOrange, anchor=base west] at (axis cs:0.05,60)
+      {non-percolated nanostars};
 
     \draw[ultra thick, Gray, dashed]
       (axis cs:894/1015, 0) -- (axis cs:894/1015,20)
       to[out=90, in=0] (axis cs:894/1015/2,38.8)
-      node at (axis cs:0.45,20) {\textbf{phase separation region}};
+      node[anchor=base west] at (axis cs:0.05,20) {phase separation region};
       
-    \node[Plum] at (axis cs:1.05,20) {\textbf{bulk gel}};
+    \node[Plum, text width=5em, align=center, anchor=base] at (axis cs:1.0,20) {bulk\linebreak gel};
 
     \addplot[ultra thick, SkyBlue, no marks]
       table[x expr=\thisrowno{0}/1015]
       {simulations/melting_Y16SE0_concentrations.tsv};
     \node[SkyBlue, anchor=north east] at (rel axis cs:0.6,0.94)
-      {\textbf{single strands}};
+      {single strands};
 
     \draw[->, ultra thick, Plum] (axis cs:1,95) -- (axis cs:1,35);
   \end{axis}
 
-  \begin{scope}[clip=false]
-    \node[anchor=west, xshift=0.5cm, yshift=-0.5cm] at (phasediag.outer east |- phasediag.north)
-      {\includegraphics[width=2.5cm]{svg_schematics/ssDNA.pdf}};
-    \node[anchor=west, yshift=-2.5cm] at (phasediag.outer east |- phasediag.north)
-      {\includegraphics[width=3cm]{svg_schematics/free-ns.pdf}};
-    \node[anchor=west, yshift=-5.5cm] at (phasediag.outer east |- phasediag.north)
-      {\includegraphics[width=3cm]{svg_schematics/gel.pdf}};
+  \begin{scope}[clip=false, inner sep=0]
+    \node[anchor=north east] at ($(phasediag.outer north west)+(\columnwidth,0)$)
+      (ss){\includegraphics[width=0.25\columnwidth]{svg_schematics/3ssDNA.jpg}};
+    \node[anchor=south east] at  ($(phasediag.left of south west)+(\columnwidth,0)$)
+     (gel) {\includegraphics[width=0.25\columnwidth]{svg_schematics/gel.pdf}};
+	\node[anchor=center] at ($(ss.south)!0.5!(gel.north)$)
+      {\includegraphics[width=0.25\columnwidth]{svg_schematics/free-ns.pdf}};
   \end{scope}
 
 \end{tikzpicture}
