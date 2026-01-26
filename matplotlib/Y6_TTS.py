@@ -16,6 +16,7 @@ import uncertainties
 import matplotlib as mpl
 from matplotlib.ticker import LogLocator
 import matplotlib.gridspec as gridspec
+from matplotlib import color_sequences
 
 mpl.rcdefaults()
 plt.style.use(['plt-style-2.mplstyle', 'tableau-colorblind10'])
@@ -155,7 +156,7 @@ Gs, taus, Ts = [], [], []
 for i, (x,y), rot in zip(n, [(1,10), (2e-2,0.5), (5e-3,2), (1.5e-3,1.6), (2e-3,1.3e3)], [60]*4+[0]):
     T, freq, Gp, Gpp, tandelta, torque = get_moduli(basedir, i) 
     omega = 2*π*freq
-    line = axs[0,0].errorbar(omega, tandelta, 0.2/torque*tandelta, marker='o', linestyle='None')[0]
+    line = axs[0,0].errorbar(omega, tandelta, 0.2/torque*tandelta, marker='d', linestyle='None')[0]
     axs[1,0].errorbar(omega, Gp, 0.1/torque*Gp, marker='s', linestyle='None', color=line.get_color(), label=rf'T={T}$^\circ$C')
     axs[2,0].errorbar(omega, Gpp, 0.1/torque*Gpp, marker='v', linestyle='None', color=line.get_color())
     #fit by Maxwell
@@ -213,7 +214,7 @@ for i, (x,y), rot in zip(n, [(1,10), (2e-2,0.5), (5e-3,2), (1.5e-3,1.6), (2e-3,1
     axs[1,0].text(x, y, f'{int(T):d}°C', color=line.get_color(), size='x-small', rotation=rot)
 
     # TTS
-    axs[0,1].plot(omega*tau, tandelta, marker='o', linestyle='None', color=line.get_color())
+    axs[0,1].plot(omega*tau, tandelta, marker='d', linestyle='None', color=line.get_color())
     axs[1,1].plot(omega*tau, Gp/G*tau**beta0, marker='s', linestyle='None', color=line.get_color())
     axs[2,1].plot(omega*tau, Gpp/G*tau**beta0, marker='v', linestyle='None', color=line.get_color())
     
@@ -226,8 +227,9 @@ axs[0,1].plot(np.logspace(-2,4), fmmtandelta(np.logspace(-2,4), 1, 1, alpha0, be
 axs[1,1].plot(np.logspace(-2,4), fmmGp(np.logspace(-2,4), 1, 1, alpha0, beta0), linestyle='--', color='black')
 axs[2,1].plot(np.logspace(-2,4), fmmGpp(np.logspace(-2,4), 1, 1, alpha0, beta0), linestyle='--', color='black')
 
-ax1.plot(Ts, Gs/taus**beta0, marker='d', label=r'$\mathbb{G}/\tau^\beta$')
-ax2.plot(Ts, taus, marker='d', label=r'$\tau$')
+color = color_sequences['tab20c'][4]
+ax1.plot(Ts, Gs/taus**beta0, color=color, marker='o', label=r'$\mathbb{G}/\tau^\beta$')
+ax2.plot(Ts, taus, color=color, marker='o', label=r'$\tau$')
 
 
 axs[0,0].set_ylim(3e-2, 3e1)

@@ -16,6 +16,7 @@ from scipy.interpolate import CubicSpline
 from uncertainties import ufloat, unumpy
 import uncertainties
 import matplotlib as mpl
+from matplotlib import color_sequences
 mpl.rcdefaults()
 plt.style.use(['plt-style-2.mplstyle', 'tableau-colorblind10'])
 # plt.style.use(['tableau-colorblind10'])
@@ -252,13 +253,14 @@ if __name__ == '__main__':
     ax2[0] = fig.add_subplot(gs[0:2, 1])   
     ax2[1] = fig.add_subplot(gs[2:4, 1], sharex=ax2[0])   
     ax2[2] = fig.add_subplot(gs[4:6, 1], sharex=ax2[0])
-    ax2[0].plot(range(75,54,-1), Gis, marker='o', mfc='none')
-    line, = ax2[1].plot(range(75,54,-1), Gis*taus, marker='o', mfc='none', label=r'$\eta + \eta_s$')
-    ax2[1].text(56, 3e-3, r'$\eta + \eta_s$', color=line.get_color(), size='x-small', ha='left')
-    line, = ax2[1].plot(range(75,54,-1), etas, marker='.', color='black', label=r'$\eta_s$')
-    ax2[1].text(56, 3e-4, r'$\eta_s$', color=line.get_color(), size='x-small', ha='left')
+    color = color_sequences['tab20c'][4]
+    ax2[0].plot(range(75,54,-1), Gis, color=color, marker='o')
+    ax2[1].plot(range(75,54,-1), Gis*taus, color=color, marker='o', label=r'$\eta + \eta_s$')
+    ax2[1].text(56, 3e-3, r'$\eta + \eta_s$', color=color, size='x-small', ha='left')
+    ax2[1].plot(range(75,54,-1), etas, marker='.', color='black', mfc='none', label=r'$\eta_s$')
+    ax2[1].text(56, 3e-4, r'$\eta_s$', color='black', size='x-small', ha='left')
     
-    ax2[2].plot(range(75,54,-1), taus, marker='o', mfc='none')
+    ax2[2].plot(range(75,54,-1), taus, color=color, marker='o')
     # ax2[0].set_yscale('log')
     ax2[1].set_yscale('log')
     ax2[2].set_yscale('log')
