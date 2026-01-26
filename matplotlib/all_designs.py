@@ -216,7 +216,8 @@ axs[1].set_xlabel(r'$\phi_\mathrm{2,rot}$')
 axs[0].set_yscale('log')
 #axs[1].set_xscale('log')
 for ax, label in zip([ax0, ax1, ax2], 'abc'):
-    ax.axhspan(1, 100, ls='none', color=[0.9]*3+[1])
+    #ax.axhspan(1, 100, ls='none', color=[0.9]*3+[1])
+    ax.axhline(1, ls='--', color='k')
     ax.text(0.98, 0.98, f'({label})', ha='right', va='top', transform=ax.transAxes)
 
 marks = {16:'.', 32:'*'}
