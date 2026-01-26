@@ -254,18 +254,18 @@ if __name__ == '__main__':
     ax2[1] = fig.add_subplot(gs[2:4, 1], sharex=ax2[0])   
     ax2[2] = fig.add_subplot(gs[4:6, 1], sharex=ax2[0])
     color = color_sequences['tab20c'][4]
-    ax2[0].plot(range(75,54,-1), Gis, color=color, marker='o')
-    ax2[1].plot(range(75,54,-1), Gis*taus, color=color, marker='o', label=r'$\eta + \eta_s$')
+    ax2[0].plot(range(75,54,-1), Gis, 'o', color=color)
+    ax2[1].plot(range(75,54,-1), Gis*taus, 'o', color=color, label=r'$\eta + \eta_s$')
     ax2[1].text(56, 3e-3, r'$\eta + \eta_s$', color=color, size='x-small', ha='left')
     ax2[1].plot(range(75,54,-1), etas, marker='.', color='black', mfc='none', label=r'$\eta_s$')
     ax2[1].text(56, 3e-4, r'$\eta_s$', color='black', size='x-small', ha='left')
     
-    ax2[2].plot(range(75,54,-1), taus, color=color, marker='o')
+    ax2[2].plot(range(75,54,-1), taus, 'o', color=color)
     # ax2[0].set_yscale('log')
     ax2[1].set_yscale('log')
     ax2[2].set_yscale('log')
     ax2[0].set_xlim(54, 76)
-    ax2[0].set_ylim(12, 26)
+    ax2[0].set_ylim(12, 29)
     ax2[-1].set_xlabel(r'T ($^\circ$C)')
     ax2[0].set_ylabel(r'$G_i$ (Pa)')
     ax2[1].set_ylabel(r'$\eta$ (Pa.s)')
@@ -273,10 +273,9 @@ if __name__ == '__main__':
     #ax2[1].legend()
     
     # fig2.suptitle('Y16SE6_1mM_newdata')
-    ax = ax2[0]
-    ax.text(0.05, 0.95, '(c)', ha='left', va='top', transform=ax.transAxes)
-    for ax, label in zip(ax2[1:], 'de'):
+    for ax, label in zip(ax2, 'cde'):
         ax.text(0.95, 0.95, f'({label})', ha='right', va='top', transform=ax.transAxes)
+        ax.axvspan(65, 80, ls='none', color=[0.8]*3+[1])
     plt.setp(ax2[0].get_xticklabels(), visible=False)
     plt.setp(ax2[1].get_xticklabels(), visible=False)
     # np.savetxt('params_Y16SE6_newdata.tsv', 

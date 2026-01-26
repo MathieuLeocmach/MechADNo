@@ -257,6 +257,7 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
 
     #remove very high temperature regime where there is no maximum
     mintandelta = mintandelta[np.argmax(mintandelta[:,1]):]
+    print(f'T={mintandelta[np.where(mintandelta[:,1]<1)[0][0], 0]}°C for Y{Y}SE{SE} at {C_NS} µM')
 
     #Load simulation results of NS melting
     meltingSE0 = read_csv(f'../simulations/melting_Y{Y}SE0/Y{Y}SE0_{C_NS:.1f}uM_complexes_concentration_melting-1.tsv', sep='\t').rename(columns={'# temperature':'T'})

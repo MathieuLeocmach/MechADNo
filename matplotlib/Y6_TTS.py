@@ -228,8 +228,8 @@ axs[1,1].plot(np.logspace(-2,4), fmmGp(np.logspace(-2,4), 1, 1, alpha0, beta0), 
 axs[2,1].plot(np.logspace(-2,4), fmmGpp(np.logspace(-2,4), 1, 1, alpha0, beta0), linestyle='--', color='black')
 
 color = color_sequences['tab20c'][4]
-ax1.plot(Ts, Gs/taus**beta0, color=color, marker='o', label=r'$\mathbb{G}/\tau^\beta$')
-ax2.plot(Ts, taus, color=color, marker='o', label=r'$\tau$')
+ax1.plot(Ts, Gs/taus**beta0, 'o', color=color, label=r'$\mathbb{G}/\tau^\beta$')
+ax2.plot(Ts, taus, 'o', color=color, label=r'$\tau$')
 
 
 axs[0,0].set_ylim(3e-2, 3e1)
