@@ -86,7 +86,7 @@ def get_moduli(basedir, fid):
 basedir = '../rheometer/20250122'
 
 # figures setup
-fig, axs = plt.subplots(3,2, figsize=(3.5,4), sharex='col', layout='constrained')
+fig, axs = plt.subplots(3,2, figsize=(3.5,3.5), sharex='col', layout='constrained')
 
 
 
@@ -152,7 +152,7 @@ print(rf"fit for $\beta$ on curve at T={T}$^\circ$C : $\beta$ = {beta0:.2f}")
 
 n = [3, 9, 5, 6, 7]
 Gs, taus, Ts = [], [], []
-for i in n:
+for i, (x,y), rot in zip(n, [(1,10), (2e-2,0.5), (5e-3,2), (1.5e-3,1.6), (2e-3,1.3e3)], [60]*4+[0]):
     T, freq, Gp, Gpp, tandelta, torque = get_moduli(basedir, i) 
     omega = 2*π*freq
     line = axs[0,0].errorbar(omega, tandelta, 0.2/torque*tandelta, marker='o', linestyle='None')[0]
@@ -205,18 +205,19 @@ for i in n:
     Gs.append(G)
     taus.append(tau)
     
+    #fit of the unscaled data
     axs[0,0].plot(omega, fmmtandelta(omega, fmmVGratio(tau, alpha0, beta0), 1, alpha0, beta0), color=line.get_color())
     axs[1,0].plot(omega, fmmGp(omega, G*fmmVGratio(tau, alpha0, beta0), G, alpha0, beta0), color=line.get_color())
     axs[2,0].plot(omega, fmmGpp(omega, G*fmmVGratio(tau, alpha0, beta0), G, alpha0, beta0), color=line.get_color())
+    #display temperatures on panel (b)
+    axs[1,0].text(x, y, f'{int(T):d}°C', color=line.get_color(), size='x-small', rotation=rot)
 
-    
+    # TTS
     axs[0,1].plot(omega*tau, tandelta, marker='o', linestyle='None', color=line.get_color())
-    # axs[0,1].plot(omega*tau, fmmtandelta(omega, G*fmmVGratio(tau, alpha, beta), G, alpha, beta), color=line.get_color())
-    # axs[1,1].plot(omega*tau, Gp, marker='s', linestyle='None', color=line.get_color())
     axs[1,1].plot(omega*tau, Gp/G*tau**beta0, marker='s', linestyle='None', color=line.get_color())
-    # axs[1,1].plot(omega*tau, fmmGp(omega, G*fmmVGratio(tau, alpha, beta), G, alpha, beta)/G, color=line.get_color())
-    # axs[2,1].plot(omega*tau, fmmGpp(omega, G*fmmVGratio(tau, alpha, beta), G, alpha, beta)/G, color=line.get_color())
     axs[2,1].plot(omega*tau, Gpp/G*tau**beta0, marker='v', linestyle='None', color=line.get_color())
+    
+    
 
 axs[0,1].plot(omega*tauM, mmtandelta(omega, 1, tauM), linestyle=':', color='black')
 axs[1,1].plot(np.logspace(-2,4), mmGp(np.logspace(-2,4), 1, 1), linestyle=':', color='black')
@@ -263,8 +264,8 @@ for label in axs[-1,1].xaxis.get_ticklabels()[1::2]:
     label.set_visible(False)
 
 
-handles, labels = axs[1,0].get_legend_handles_labels()
-fig.legend(handles, labels, loc='outside upper center', ncol=3, borderaxespad=0.01)
+#handles, labels = axs[1,0].get_legend_handles_labels()
+#fig.legend(handles, labels, loc='outside upper center', ncol=3, borderaxespad=0.01)
 fig.get_layout_engine().set(wspace=0, w_pad=0, hspace=0, h_pad=0.01)
 fig.align_ylabels()
 
