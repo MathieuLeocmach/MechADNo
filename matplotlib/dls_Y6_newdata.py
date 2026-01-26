@@ -275,7 +275,7 @@ if __name__ == '__main__':
     # fig2.suptitle('Y16SE6_1mM_newdata')
     for ax, label in zip(ax2, 'cde'):
         ax.text(0.95, 0.95, f'({label})', ha='right', va='top', transform=ax.transAxes)
-        ax.axvspan(65, 80, ls='none', color=[0.8]*3+[1])
+        ax.axvspan(65.5, 80, ls='none', color=[0.9]*3+[1])
     plt.setp(ax2[0].get_xticklabels(), visible=False)
     plt.setp(ax2[1].get_xticklabels(), visible=False)
     # np.savetxt('params_Y16SE6_newdata.tsv', 
