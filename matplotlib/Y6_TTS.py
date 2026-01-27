@@ -222,7 +222,7 @@ for i, (x,y), rot in zip(n, [(1,10), (2e-2,0.5), (5e-3,2), (1.5e-3,1.6), (2e-3,1
 np.savetxt(
     'Y16SE6_fMM_bulkrheo_low_temp.tsv',
     np.column_stack((Ts, Gs, taus, np.full(len(Ts), alpha0), np.full(len(Ts), beta0))),
-    header='T\tGi\ttau\talpha\tbeta',
+    header='T\tG\ttau\talpha\tbeta',
     delimiter='\t',
     fmt=['%.0f', '%.01f', '%.03f', '%.03f', '%.03f']
 )

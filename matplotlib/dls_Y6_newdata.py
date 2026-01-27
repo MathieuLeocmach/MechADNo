@@ -235,6 +235,15 @@ if __name__ == '__main__':
         taus = np.append(taus, tau)
         Gis = np.append(Gis, Gi)
         etas = np.append(etas, eta_s)
+    
+    #save fit parameters
+    np.savetxt(
+        'Y16SE6_JS_DLSrheo_high_temp.tsv',
+        np.column_stack((np.arange(75,54,-1), Gis, taus, etas)),
+        header='T\tGi\ttau\teta_s',
+        delimiter='\t',
+        fmt=['%.0f', '%.01f', '%e', '%e']
+    )
         
     
     #axs[0].set_ylim(2e-5, 2e-2)

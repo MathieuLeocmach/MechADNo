@@ -171,7 +171,7 @@ if __name__ == '__main__':
             color=line.get_color(),
             #label='JS fit'
         )
-        print(f'T={T}°C\tGi={Gi:.2f} Pa\ttau={1e3*eta/Gi:.2f}ms\teta_s={1e3*eta_s:.3f} mPa.s')
+        print(f'T={T}°C\tGi={Gi:.2f} Pa\ttau={1e3*eta/Gi:.2f}ms\teta_s={1e3*eta_s:.3f} mPa.s\txi={(const.Boltzmann*const.convert_temperature(T, 'C', 'K')/Gi/2)**(1/3)*1e9:.1f} nm')
 
     axs[0].set_xscale('log')
     axs[0].set_yscale('log')
