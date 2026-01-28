@@ -20,12 +20,15 @@
     \node[BurntOrange, anchor=base west] at (axis cs:0.05,60)
       {non-percolated nanostars};
 
+	\addplot[mark=*] coordinates {(894/1015,20)};
+	\addplot[mark=square] coordinates {(268/1015,25)};
+
     \draw[ultra thick, Gray, dashed]
       (axis cs:894/1015, 0) -- (axis cs:894/1015,20)
       to[out=90, in=0] (axis cs:894/1015/2,38.8)
-      node[anchor=base west] at (axis cs:0.05,20) {phase separation region};
+      node[anchor=south west] at (axis cs:0.05,10) {phase separation region};
       
-    \node[Plum, text width=5em, align=center, anchor=base] at (axis cs:1.0,20) {bulk\linebreak gel};
+    \node[Plum, text width=5em, align=center, anchor=south] at (axis cs:1.0,10) {bulk\linebreak gel};
 
     \addplot[ultra thick, SkyBlue, no marks]
       table[x expr=\thisrowno{0}/1015]
@@ -40,7 +43,7 @@
     \node[anchor=north east] at ($(phasediag.outer north west)+(\columnwidth,0)$)
       (ss){\includegraphics[width=0.3\columnwidth]{svg_schematics/3ssDNA.jpg}};
     \node[anchor=south east] at  ($(phasediag.left of south west)+(\columnwidth,0)$)
-     (gel) {\includegraphics[width=0.3\columnwidth]{svg_schematics/gel.pdf}};
+     (gel) {\includegraphics[width=0.3\columnwidth]{svg_schematics/gel-25C-2.jpg}};
 	\node[anchor=center] at ($(ss.south)!0.5!(gel.north)$)
       {\includegraphics[width=0.3\columnwidth]{svg_schematics/free-ns.pdf}};
   \end{scope}
