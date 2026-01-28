@@ -7,6 +7,7 @@
     ylabel={$T$ ($^\circ$C)},
     xmin=0, xmax=1.2,
     ymin=0, ymax=100,
+	ylabel near ticks, ylabel shift=-0.5em,
     %tick label style={font=\large},
     %label style={font=\Large},
     %major tick length=5pt,
@@ -37,11 +38,11 @@
 
   \begin{scope}[clip=false, inner sep=0]
     \node[anchor=north east] at ($(phasediag.outer north west)+(\columnwidth,0)$)
-      (ss){\includegraphics[width=0.25\columnwidth]{svg_schematics/3ssDNA.jpg}};
+      (ss){\includegraphics[width=0.3\columnwidth]{svg_schematics/3ssDNA.jpg}};
     \node[anchor=south east] at  ($(phasediag.left of south west)+(\columnwidth,0)$)
-     (gel) {\includegraphics[width=0.25\columnwidth]{svg_schematics/gel.pdf}};
+     (gel) {\includegraphics[width=0.3\columnwidth]{svg_schematics/gel.pdf}};
 	\node[anchor=center] at ($(ss.south)!0.5!(gel.north)$)
-      {\includegraphics[width=0.25\columnwidth]{svg_schematics/free-ns.pdf}};
+      {\includegraphics[width=0.3\columnwidth]{svg_schematics/free-ns.pdf}};
   \end{scope}
 
 \end{tikzpicture}
