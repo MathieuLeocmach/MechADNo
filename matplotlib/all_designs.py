@@ -134,10 +134,14 @@ def load_DLS(rootdir, SE=6, Y=16, c=1000):
             name = f"cooling_{c+1}/Y{Y}SE{SE}-{middle_name}{c+1}_{{:03d}}.csv"
             measurements.append(load_and_sort(os.path.join(dirfile, name)))
         return np.reshape(measurements, (Ncooling-1, Ntemperature, Nrepeat))
-
-def phi_rotating_assembled_only_saturated(pSE, pNS=1, SE=6, C_0=1e-3, Y=16, persistence=50):
+    
+def contour2length(L, persistence=50):
+    """Conversion from contour length to actual size of the random walk"""
+    return L*(1+L/persistence)**(-2/5)
+    
+def phi_rotating_assembled_only_crossover(pSE, pNS=1, SE=6, C_0=1e-3, Y=16, persistence=50):
     """Packing fraction of freely rotating doublets of assembled NS. Valid only at small pSE.
-    Lengths are saturated by the persistence length.
+    The crossover from linear to self-avoiding walk at the persistence length lD is taken into account.
 
     pSE is the probability of association of a SE-SE bond.
     pNS is the probability of association of a nanostar.
@@ -148,9 +152,9 @@ def phi_rotating_assembled_only_saturated(pSE, pNS=1, SE=6, C_0=1e-3, Y=16, pers
     R = 0.764 + Y * 0.332
     L = 2*R + SE * 0.332
     #Volume occupied by a NS in nm^3
-    V_NS = np.pi/3 * min(2*R, persistence)**3
+    V_NS = np.pi/3 * contour2length(2*R, persistence)**3
     #Volumne occupied by a freely rotating doublet of NS in nm^3
-    V_rotating = np.pi/6* min(2*R+L, persistence)**3
+    V_rotating = np.pi/6* contour2length(2*R+L, persistence)**3
     #At small pSE, doublet is the only relevant cluster,
     # thus the concentration of doublet is half the concentration of assembled nanostar
     # that are assembled
@@ -283,20 +287,20 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
     )
     
     axs[1].plot(
-        phi_rotating_assembled_only_saturated(
+        phi_rotating_assembled_only_crossover(
             pSE(mintandelta[good,0]),
             pNS(mintandelta[good,0]),
-            SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=40
+            SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=50
             ),
         mintandelta[good,1],
         ls='none', marker=marks[Y], color=color,
         #label=f'Y{Y}SE{SE} {C_NS: >4d} µM'
         )
     axs[1].plot(
-        phi_rotating_assembled_only_saturated(
+        phi_rotating_assembled_only_crossover(
             pSE(mintandelta[~good,0]),
             pNS(mintandelta[~good,0]),
-            SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=40
+            SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=50
             ),
         mintandelta[~good,1],
         ls='none', marker=marks[Y], color=color, mfc='none',
@@ -309,7 +313,7 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
             
 ax0.set_ylim(0.2,50)
 axs[0].set_ylim(0.18, 8)
-axs[1].set_xlim(0,1.5)
+axs[1].set_xlim(0,1.1)
 axs[1].set_xticks(np.arange(0,1.5,0.5))
 axs[1].axvline(0.58, ls=':', color='k')
 #handles, labels = axs[0].get_legend_handles_labels()
