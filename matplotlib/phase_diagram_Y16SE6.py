@@ -2,6 +2,9 @@ import numpy as np
 from scipy import constants
 from matplotlib import pyplot as plt
 
+def contour2length(L, persistence=50):
+    """Conversion from contour length to actual size of the random walk"""
+    return L*(1+L/persistence)**(-2/5)
 
 
 def plot_phase_diagram(ax, Y=16, SE=6, Cdense=894):
@@ -13,7 +16,12 @@ def plot_phase_diagram(ax, Y=16, SE=6, Cdense=894):
     
     #overlap concentration
     R = 1 + 0.332 * (Y+SE/2) #nm
-    Cov = 1/(4/3*np.pi*(R*1e-9)**3*1e3)/constants.Avogadro*1e6 #µM
+    R = 0.764 + 0.332 * Y#nm
+    Cov = 1/(4/3*np.pi*(contour2length(R)*1e-9)**3*1e3)/constants.Avogadro*1e6 #µM
+    print(f'Cov = {Cov:.0f} µM')
+    R = 0.764 + 0.332 * (Y+SE/2)#nm
+    CovSE = 1/(4/3*np.pi*(contour2length(R)*1e-9)**3*1e3)/constants.Avogadro*1e6 #µM
+    print(f'CovSE = {CovSE:.0f} µM')
 
     #Sticky ends
     C_SE, T = np.loadtxt(f'../simulations/mfold_SE{SE}_concentration.tsv', skiprows=1, usecols=[0,3], unpack=True)
@@ -31,10 +39,19 @@ def plot_phase_diagram(ax, Y=16, SE=6, Cdense=894):
     #Nanostars
     C_NS, T = np.loadtxt(f'../simulations/melting_Y{Y}SE0_concentrations.tsv', skiprows=1, usecols=[0,1], unpack=True)
     ax.plot(C_NS / Cov, T, label=r'$T_\mathrm{NS}$')
+    
+    #overlap of SE
+    ax.axvline(CovSE/Cov, ls=':', color='k')
+    
+    #arrow at 1000µM
+    ax.annotate(
+        '', xy=(1000/Cov, 10), xytext=(1000/Cov, 95), 
+        arrowprops=dict(facecolor='black', shrink=0.05),
+    )
 
     ax.set_xlabel(r'$\phi_\mathrm{NS}=C_\mathrm{NS}/C_\mathrm{ov}$')
     ax.set_ylabel(r'$T$ (°C)')
-    ax.set_xlim(0,1.2)
+    ax.set_xlim(0,0.74)
     ax.set_ylim(0, 100)
 
 if __name__ == "__main__":

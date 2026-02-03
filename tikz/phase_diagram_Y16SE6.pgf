@@ -5,7 +5,7 @@
     height=0.7\columnwidth,
     xlabel={$\phi_\mathrm{NS}=C_\mathrm{NS}/C_\mathrm{ov}$},
     ylabel={$T$ ($^\circ$C)},
-    xmin=0, xmax=1.2,
+    xmin=0, xmax=0.55,
     ymin=0, ymax=100,
 	ylabel near ticks, ylabel shift=-0.5em,
     %tick label style={font=\large},
@@ -14,30 +14,34 @@
     clip=true,
   ]    
 
+	\fill[lightgray] (axis cs:1314/2028,0) rectangle (rel axis cs:1,1);
     \addplot[ultra thick, BurntOrange, no marks]
-      table[x expr=\thisrowno{0}/1.5/1015, y index=3]
+      table[x expr=\thisrowno{0}/1.5/2028, y index=3]
       {simulations/mfold_SE6_concentration.tsv};
-    \node[BurntOrange, anchor=base west] at (axis cs:0.05,60)
+    \node[BurntOrange, anchor=base west, inner xsep=5pt] at (axis cs:0,60)
       {non-percolated nanostars};
 
-	\addplot[mark=*] coordinates {(894/1015,20)};
-	\addplot[mark=square] coordinates {(268/1015,25)};
+	\addplot[mark=*] coordinates {(894/2028,20)};
+	\addplot[mark=square] coordinates {(268/2028,25)};
 
     \draw[ultra thick, Gray, dashed]
-      (axis cs:894/1015, 0) -- (axis cs:894/1015,20)
-      to[out=90, in=0] (axis cs:894/1015/2,38.8)
-      node[anchor=south west] at (axis cs:0.05,10) {phase separation region};
+      (axis cs:894/2028, 0) -- (axis cs:894/2028,20)
+      to[out=90, in=0] (axis cs:894/2028/2,38.8)
+      node[anchor=south west, inner xsep=5pt] at (axis cs:0,10) {phase separation region};
+
+	
       
-    \node[Plum, text width=5em, align=center, anchor=south] at (axis cs:1.0,10) {bulk\linebreak gel};
+    \node[Plum, text width=5em, align=center, anchor=south] at (axis cs:0.49,10) {bulk\linebreak gel};
 
     \addplot[ultra thick, SkyBlue, no marks]
-      table[x expr=\thisrowno{0}/1015]
+      table[x expr=\thisrowno{0}/2028]
       {simulations/melting_Y16SE0_concentrations.tsv};
     \node[SkyBlue, anchor=north east] at (rel axis cs:0.6,0.94)
       {single strands};
 
-    \draw[->, ultra thick, Plum] (axis cs:1,95) -- (axis cs:1,35);
+    \draw[->, ultra thick, Plum] (axis cs:1000/2028,95) -- (axis cs:1000/2028,35);
   \end{axis}
+	%\draw[dotted] (phasediag.north-|compressed) -- (phasediag.south-|compressed);
 
   \begin{scope}[clip=false, inner sep=0]
     \node[anchor=north east] at ($(phasediag.outer north west)+(\columnwidth,0)$)
