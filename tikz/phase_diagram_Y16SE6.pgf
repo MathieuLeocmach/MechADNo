@@ -31,7 +31,8 @@
 
 	
       
-    \node[Plum, text width=5em, align=center, anchor=south] at (axis cs:0.49,10) {bulk\linebreak gel};
+    %\node[Plum, text width=5em, align=center, anchor=south] at (axis cs:0.49,10) {bulk\linebreak gel};
+	\node[Plum, anchor=base east, inner xsep=5pt] at (axis cs:0.55,35) {bulk gel};
 
     \addplot[ultra thick, SkyBlue, no marks]
       table[x expr=\thisrowno{0}/2028]
@@ -39,7 +40,9 @@
     \node[SkyBlue, anchor=north east] at (rel axis cs:0.6,0.94)
       {single strands};
 
-    \draw[->, ultra thick, Plum] (axis cs:1000/2028,95) -- (axis cs:1000/2028,35);
+    %\draw[->, ultra thick, Plum] (axis cs:1000/2028,95) -- (axis cs:1000/2028,35);
+	\draw[->, ultra thick, BurntOrange] (axis cs:1000/2028,75) -- (axis cs:1000/2028,55);
+	\draw[->, ultra thick, Plum] (axis cs:1000/2028,30) -- (axis cs:1000/2028,10);
   \end{axis}
 	%\draw[dotted] (phasediag.north-|compressed) -- (phasediag.south-|compressed);
 
@@ -48,8 +51,12 @@
       (ss){\includegraphics[width=0.3\columnwidth]{svg_schematics/3ssDNA.jpg}};
     \node[anchor=south east] at  ($(phasediag.left of south west)+(\columnwidth,0)$)
      (gel) {\includegraphics[width=0.3\columnwidth]{svg_schematics/gel-25C-2.jpg}};
-	\node[anchor=center] at ($(ss.south)!0.5!(gel.north)$)
-      {\includegraphics[width=0.3\columnwidth]{svg_schematics/free-ns.pdf}};
+	\node[anchor=center] at ($(ss.south)!0.5!(gel.north)$) (NS)
+      {\includegraphics[width=0.3\columnwidth]{svg_schematics/1NS.png}};
   \end{scope}
+  \node[below right=0 of phasediag.north west]{(a)};
+  \node[above left=0 of ss.south east, inner xsep=0]{(b)};
+  \node[left=0 of NS.east, inner xsep=0]{(c)};
+  \node[below left=0.1em and 0 of gel.north east, inner xsep=0]{(d)};
 
 \end{tikzpicture}
