@@ -12,6 +12,7 @@ import os
 from scipy.interpolate import interp1d
 from scipy.optimize import root_scalar, curve_fit, least_squares, leastsq
 from scipy.special import gamma
+from scipy import constants as const
 import uncertainties
 import matplotlib as mpl
 from matplotlib.ticker import LogLocator
@@ -238,6 +239,20 @@ color = color_sequences['tab20c'][4]
 ax1.plot(Ts, Gs/taus**beta0, 'o', color=color, label=r'$\mathbb{G}/\tau^\beta$')
 ax2.plot(Ts, taus, 'o', color=color, label=r'$\tau$')
 
+#Arrhenius fit
+EA, A = curve_fit(
+    lambda T, EA, A: A + EA/(const.R*T),
+    const.convert_temperature(Ts, 'C', 'K'),
+    np.log(taus),
+    [2*91.5e3, 0]
+)[0]
+print(f'E_a = {EA/1e3} kJ/mol')
+ax2.plot(Ts, np.exp(A + EA/const.convert_temperature(Ts, 'C', 'K')/const.R), '--k')
+
+#pSE=1 prediction of G
+C_NS = 1000 #µM to be converted to mol/m3
+ax1.plot(Ts, 0.5*C_NS * 1e-6 *1e3* const.convert_temperature(Ts, 'C', 'K')*const.R, '--k')
+
 
 axs[0,0].set_ylim(3e-2, 3e1)
 axs[1,0].set_ylim(2e-1, 3e3)
@@ -255,7 +270,7 @@ for ax, label in zip(axs[1:,1], 'ef'):
 
 # ax1.legend(fontsize=8, loc='center right')
 ax2.set_yscale('log')
-# ax1.set_ylim(900, 1500)
+ax1.set_ylim(0, 1500)
 ax1.xaxis.tick_top()
 ax1.xaxis.set_label_position('top') 
 # ax2.xaxis.set_label_position('top')
