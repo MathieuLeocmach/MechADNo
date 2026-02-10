@@ -265,12 +265,29 @@ if __name__ == '__main__':
     ax2[2] = fig.add_subplot(gs[4:6, 1], sharex=ax2[0])
     color = color_sequences['tab20c'][4]
     ax2[0].plot(range(75,54,-1), Gis, 'o', color=color)
-    ax2[1].plot(range(75,54,-1), Gis*taus, 'o', color=color, label=r'$\eta + \eta_s$')
+    ax2[1].plot(range(75,54,-1), Gis*taus + etas, 'o', color=color, label=r'$\eta + \eta_s$')
     ax2[1].text(56, 2e-3, r'$\eta_\mathrm{M} + \eta_\mathrm{s}$', color=color, size='x-small', ha='left')
     ax2[1].plot(range(75,54,-1), etas, marker='.', color='black', mfc='none', label=r'$\eta_\mathrm{s}$')
     ax2[1].text(56, 3e-4, r'$\eta_s$', color='black', size='x-small', ha='left')
     
     ax2[2].plot(range(75,54,-1), taus, 'o', color=color)
+    #Arrhenius fit, same activation energy as in rheology
+    goodT = Gis*taus + etas>10*etas
+    EA = 241.58e3
+    A, = curve_fit(
+        lambda T, A: A + EA/(const.R*T),
+        const.convert_temperature(np.arange(75,54,-1)[goodT], 'C', 'K'),
+        np.log(taus[goodT]),
+        [0]
+    )[0]
+    #print(f'E_A = {EA*1e-3:.1f} kJ.mol\t n = E_A/dH = {EA/dH:.3f}')
+    #print(f'tau0 = {np.exp(A) * np.exp(EA/dH*dS/const.R) * 1e3:.2f} ms')
+    ax2[2].plot(
+        np.arange(75,54,-1)[goodT], 
+        np.exp(A + EA/const.convert_temperature(np.arange(75,54,-1)[goodT], 'C', 'K')/const.R),
+        '--k'
+    )
+    
     # ax2[0].set_yscale('log')
     ax2[1].set_yscale('log')
     ax2[2].set_yscale('log')
