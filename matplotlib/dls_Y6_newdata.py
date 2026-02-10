@@ -17,6 +17,7 @@ from uncertainties import ufloat, unumpy
 import uncertainties
 import matplotlib as mpl
 from matplotlib import color_sequences
+from matplotlib.collections import LineCollection
 mpl.rcdefaults()
 plt.style.use(['plt-style-2.mplstyle', 'tableau-colorblind10'])
 # plt.style.use(['tableau-colorblind10'])
@@ -265,8 +266,8 @@ if __name__ == '__main__':
     color = color_sequences['tab20c'][4]
     ax2[0].plot(range(75,54,-1), Gis, 'o', color=color)
     ax2[1].plot(range(75,54,-1), Gis*taus, 'o', color=color, label=r'$\eta + \eta_s$')
-    ax2[1].text(56, 3e-3, r'$\eta + \eta_s$', color=color, size='x-small', ha='left')
-    ax2[1].plot(range(75,54,-1), etas, marker='.', color='black', mfc='none', label=r'$\eta_s$')
+    ax2[1].text(56, 2e-3, r'$\eta_\mathrm{M} + \eta_\mathrm{s}$', color=color, size='x-small', ha='left')
+    ax2[1].plot(range(75,54,-1), etas, marker='.', color='black', mfc='none', label=r'$\eta_\mathrm{s}$')
     ax2[1].text(56, 3e-4, r'$\eta_s$', color='black', size='x-small', ha='left')
     
     ax2[2].plot(range(75,54,-1), taus, 'o', color=color)
@@ -276,10 +277,45 @@ if __name__ == '__main__':
     ax2[0].set_xlim(54, 76)
     ax2[0].set_ylim(0, 26)
     ax2[-1].set_xlabel(r'T ($^\circ$C)')
-    ax2[0].set_ylabel(r'$G_i$ (Pa)')
+    ax2[0].set_ylabel(r'$G_\mathrm{M}$ (Pa)')
     ax2[1].set_ylabel(r'$\eta$ (Pa.s)')
     ax2[2].set_ylabel(r'$\tau$ (s)')
     #ax2[1].legend()
+    
+    # Draw Newtonian model
+    axN = axs[0].inset_axes([0.05, 0.525, 0.35, 0.3], aspect='equal')
+    axN.add_collection(LineCollection([
+        [(0,0), (1.5,0)],
+        [(1.5,0.4), (1.5,-0.4)],
+        [(1, 0.6), (1.9,0.6), (1.9,-0.6), (1,-0.6)],
+        [(1.9,0), (3,0)],
+    ], color='k'))
+    axN.set_xlim(0,3)
+    axN.set_ylim((-1,1))
+    axN.text(2, 0.5, r'$\eta_\mathrm{s}$', size='x-small', va='baseline')
+    
+    axJ = axs[1].inset_axes([0.4, 0.05, 0.55, 0.35], aspect='equal')
+    axJ.add_collection(LineCollection([
+        #eta_s
+        [(1,0), (1,3), (4,3)],
+        [(4,3.4), (4,3-0.4)],
+        [(3.5, 3.6), (4.4,3.6), (4.4,3-0.6), (3.5,3-0.6)],
+        [(4.4,3), (7,3), (7,0)],
+        #Gi
+        [(0,0), (1.5,0), (1.75,0.25), (2.25,-0.25), (2.75,0.25),(3.25,-0.25), (3.5,0), (5,0)],
+        #eta
+        [(5,0.4), (5,-0.4)],
+        [(4.5, 0.6), (5.4,0.6), (5.4,-0.6), (4.5,-0.6)],
+        [(5.4,0), (8,0)],
+    ], color='k'))
+    axJ.set_xlim(0,8)
+    axJ.set_ylim((-1,4))
+    axJ.text(4.5, 3.5, r'$\eta_\mathrm{s}$', size='x-small', va='baseline')
+    axJ.text(2.25, 0.5, r'$G_\mathrm{M}$', size='x-small', va='baseline')
+    axJ.text(5.5, 0.5, r'$\eta_\mathrm{M}$', size='x-small', va='baseline')
+    
+    for ax in [axN, axJ]:
+        ax.set_axis_off()
     
     # fig2.suptitle('Y16SE6_1mM_newdata')
     for ax, label, y in zip(ax2, 'cde', [0.2, 0.95, 0.95]):
