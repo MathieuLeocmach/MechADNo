@@ -18,6 +18,7 @@ import matplotlib as mpl
 from matplotlib.ticker import LogLocator
 import matplotlib.gridspec as gridspec
 from matplotlib import color_sequences
+from matplotlib.collections import LineCollection
 
 mpl.rcdefaults()
 plt.style.use(['plt-style-2.mplstyle', 'tableau-colorblind10'])
@@ -254,12 +255,46 @@ C_NS = 1000 #µM to be converted to mol/m3
 ax1.plot(Ts, 0.5*C_NS * 1e-6 *1e3* const.convert_temperature(Ts, 'C', 'K')*const.R, '--k')
 
 
+
 axs[0,0].set_ylim(3e-2, 3e1)
 axs[1,0].set_ylim(2e-1, 3e3)
 axs[2,0].set_ylim(1e1, 7e2)
 axs[0,1].set_ylim(3e-2, 3e1)
 axs[1,1].set_ylim(2e-4, 3e0)
 axs[2,1].set_ylim(1e-2, 9e-1)
+
+# Draw Maxwell model
+axM = axs[2,1].inset_axes([0.625, 0.1, 0.35, 0.2], aspect='equal')
+axM.add_collection(LineCollection([
+    #Gi
+    [(0,0), (0.5,0), (0.75,0.25), (1.25,-0.25), (1.75,0.25),(2.25,-0.25), (2.5,0), (4,0)],
+    #eta
+    [(4,0.4), (4,-0.4)],
+    [(3.5, 0.6), (4.4,0.6), (4.4,-0.6), (3.5,-0.6)],
+    [(4.4,0), (6,0)],
+], color='k'))
+axM.set_xlim(0,6)
+axM.set_ylim((-1,1))
+axM.text(1.25, 0.5, r'$G$', size='x-small', va='baseline')
+axM.text(4.5, 0.5, r'$\eta$', size='x-small', va='baseline')
+
+# Draw fractional Maxwell model
+axf = axs[2,1].inset_axes([0.575, 0.7, 0.4, 0.2], aspect='equal')
+axf.add_collection(LineCollection([
+    [(0,0), (7,0)],
+    #G
+    [(1,0), (1,0.75), (2,0)],
+    #V
+    [(5,0), (5,0.75), (6,0)],
+], color='k'))
+axf.set_xlim(0,7)
+axf.set_ylim((-1,1))
+axf.text(1.5, 1, r'$\mathbb{G},\,\beta$', size='x-small', va='baseline', ha='center')
+axf.text(5.5, 1, r'$\mathbb{V},\,\alpha$', size='x-small', va='baseline', ha='center')
+
+for ax in [axM, axf]:
+    ax.set_axis_off()
+
 axs[0,0].text(0.95, 0.95, '(a)', ha='right', va='top', transform=axs[0,0].transAxes)
 for ax, label in zip(axs[1:,0], 'bc'):
     ax.text(0.95, 0.05, f'({label})', ha='right', va='bottom', transform=ax.transAxes)
