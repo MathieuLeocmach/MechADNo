@@ -170,11 +170,11 @@ if __name__ == '__main__':
         #Y16SE0
         i0 = np.argmin(np.abs(measSE0['T'] - T))
         g1 = measSE0['g1'][i0]
-        err_f = 1-g1[0]
+        err_f = 1-g1[0] + 3/g1 * np.sqrt(Dts/120)
         J = f2J(g1, T=T, q=q, a=a) #Pa-1
         err_minus_J = np.maximum(0, J - f2J(g1 + err_f, T, q, a))
         err_plus_J = f2J(np.maximum(0, g1 - err_f), T, q, a) - J
-        goodt = g1>0.1
+        goodt = err_plus_J-err_minus_J<J/2#g1>0.2
         if T%5 == 0:
             print(f"T={T}")
             line = axs[0].errorbar(
@@ -203,11 +203,11 @@ if __name__ == '__main__':
         #Y16SE6
         iT = np.argmin(np.abs(Ts - T))
         g1 = meang1s[iT]
-        err_f = 1-g1[0]
+        err_f = 1-g1[0] + 3/g1 * np.sqrt(Dts/120)
         J = f2J(g1, T=T, q=q, a=a) #Pa-1
         err_minus_J = np.maximum(0, J - f2J(g1 + err_f, T, q, a))
         err_plus_J = f2J(np.maximum(0, g1 - err_f), T, q, a) - J
-        goodt = g1>0.2
+        goodt = err_plus_J-err_minus_J<J/2#g1>0.2
         if T%5 == 0:
             axs[1].errorbar(
                 Dts[goodt], J[goodt], 
