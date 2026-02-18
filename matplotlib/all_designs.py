@@ -7,6 +7,7 @@ from pandas import read_csv
 import matplotlib.pyplot as plt
 from matplotlib import color_sequences
 from matplotlib.gridspec import GridSpec
+#from mechanical_model.linear_mech import JohnsonSegalman
 
 q = 23e6 #m-1
 a = 0.255e-6 #m
@@ -186,6 +187,9 @@ meang2s = np.sum((good * measurements['count'])[...,None] * (1 + measurements['g
 meang1s = np.sqrt(meang2s -1)
 Ts = np.rint(measurements['T'].mean((0,2))).astype(int)
 
+#load JS fit parameters
+#dls = read_csv('Y16SE6_JS_DLSrheo_high_temp.tsv', sep='\t').rename(columns={'# T':'T'})
+
 for T,ma, color, (x,y) in zip(
     [75,70,65,60,55], '^osv.', 
     ['#006BA4', '#FF800E', '#ABABAB', '#595959', '#5F9ED1', '#C85200', '#898989', '#A2C8EC', '#FFBC79', '#CFCFCF'],
@@ -193,12 +197,12 @@ for T,ma, color, (x,y) in zip(
 ):
     iT = np.argmin(np.abs(Ts - T))
     g1 = meang1s[iT]
-    err_f = 1-g1[0]
+    err_f = 1-g1[0] + 3/g1 * np.sqrt(Dts/120)
     J = f2J(g1, T=T, q=q, a=a) #Pa-1
     err_minus_J = np.maximum(0, J - f2J(g1 + err_f, T, q, a))
     err_plus_J = f2J(np.maximum(0, g1 - err_f), T, q, a) - J
     alpha = np.gradient(np.log(J))/np.gradient(np.log(Dts))
-    goodt = (g1>0.2)
+    goodt = err_plus_J-err_minus_J<J/2
     if np.any((alpha<=0) | (alpha>1)):
         goodt[np.where((alpha<=0) | (alpha>1))[0][0]:] = False
     m = np.argmin(alpha[goodt])
@@ -211,6 +215,11 @@ for T,ma, color, (x,y) in zip(
         #label=f'{T:d}°C'
     )
     ax0.text(x, y, f'{T:d}°C', color=color, size='small')
+    #T, Gi, tau, eta_s = dls.iloc[np.argmin(np.abs(dls['T'] - T))]
+    #ax0.plot(
+    #    Dts[goodt], JohnsonSegalman(eta_s, G=Gi, tau=tau).tandelta(1/Dts[goodt]),
+    #    color=color,
+    #)
 #ax0.legend(fontsize='small')
 
 #fig, axs = plt.subplots(1,3, figsize=(7.3,2), sharey=True, layout='constrained')
@@ -242,13 +251,17 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
     for T, g1 in zip(Ts, meang1s):
         if np.any(np.isnan(g1)): continue
         J = f2J(g1, T=T, q=q, a=a) #Pa-1
+        err_f = 1-g1[0] + 3/g1 * np.sqrt(Dts/120)
         # log-log slope
         #alpha = np.gradient(np.log(J))/np.gradient(np.log(Dts))
         # Uncomment for smoothing before taking the slope
         w = 1
         alpha = gaussian_filter1d(np.log(J), w, order=1)/gaussian_filter1d(np.log(Dts), w, order=1)
         # Restrict the range of t where to look for minimum
-        goodt = (g1>0.2)
+        err_minus_J = np.maximum(0, J - f2J(g1 + err_f, T, q, a))
+        err_plus_J = f2J(np.maximum(0, g1 - err_f), T, q, a) - J
+        goodt = err_plus_J-err_minus_J<J/2#g1>0.2
+        #goodt = (g1>0.2)
         goodt[:5] = False
         if np.any((alpha[5:]<=0) | (alpha[5:]>1)):
             goodt[np.where((alpha[5:]<=0) | (alpha[5:]>1))[0][0]+5:] = False
@@ -262,7 +275,6 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
 
     #remove very high temperature regime where there is no maximum
     mintandelta = mintandelta[np.argmax(mintandelta[:,1]):]
-    print(f'T={mintandelta[np.where(mintandelta[:,1]<1)[0][0], 0]}°C for Y{Y}SE{SE} at {C_NS} µM')
 
     #Load simulation results of NS melting
     meltingSE0 = read_csv(f'../simulations/melting_Y{Y}SE0/Y{Y}SE0_{C_NS:.1f}uM_complexes_concentration_melting-1.tsv', sep='\t').rename(columns={'# temperature':'T'})
@@ -270,6 +282,9 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
     #load simulation results of SE-SE duplex melting
     pSEdata = read_csv(f'../simulations/melting_SE{SE}/SE{SE}_{int(np.ceil(C_NS*3)):d}uM_complexes_concentration_melting-1.tsv', sep='\t').rename(columns={'# temperature':'T'})
     pSE = CubicSpline(pSEdata['T'], pSEdata['SE+SE']/(1.5*C_NS*1e-6))
+    
+    T1 = mintandelta[np.where(mintandelta[:,1]<1)[0][0], 0]
+    print(f'T={T1}°C phi2rot={phi_rotating_assembled_only_crossover(pSE(T1), pNS(T1), SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=50):.3f} for Y{Y}SE{SE} at {C_NS} µM')
 
     color = color_sequences['tab20c'][icolor]
     good = majority_doublet(pSE(mintandelta[:,0]))
