@@ -184,15 +184,24 @@ if __name__ == '__main__':
                 label=f'{T:d}°C'
             )[0]
         #Johnson-Segalman fit of Y16SE0
-        eta_s, eta, tau =  curve_fit(
-            lambda t, eta_s, eta, tau: np.log(jsJ(t, eta/tau, eta, eta_s)),
+        #eta_s, eta, tau =  curve_fit(
+        #    lambda t, eta_s, eta, tau: np.log(jsJ(t, eta/tau, eta, eta_s)),
+        #    Dts[goodt],
+        #    np.log(J[goodt]),
+        #    [5e-4, 0.1, 0.1],
+        #    sigma = (err_plus_J + err_minus_J)[goodt]/J[goodt],
+        #    bounds=(0, np.inf),
+        #)[0]
+        #Newtonian fit
+        eta_s, = curve_fit(
+            lambda t, eta_s: np.log(t/eta_s),
             Dts[goodt],
             np.log(J[goodt]),
-            [5e-4, 0.1, 0.1],
+            [5e-4],
             sigma = (err_plus_J + err_minus_J)[goodt]/J[goodt],
             bounds=(0, np.inf),
         )[0]
-        goodt = Dts < eta_s/eta*tau
+        #goodt = Dts < eta_s/eta*tau
         #plot as if Newtonian with viscosity eta_s
         if T%5 == 0:
             axs[0].plot(
@@ -221,7 +230,7 @@ if __name__ == '__main__':
             Dts[goodt],
             np.log(J[goodt]),
             [0.1, 10, eta_s/10],
-            #sigma = (err_plus_J + err_minus_J)[goodt]/J[goodt],
+            sigma = (err_plus_J + err_minus_J)[goodt]/J[goodt],
             bounds=(0, np.inf),
         )[0]
         #print(np.ptp((err_plus_J + err_minus_J)[goodt]/J[goodt]))
@@ -344,7 +353,7 @@ if __name__ == '__main__':
     #         np.array([range(75,55,-1),Gis, taus]),
     #         delimiter=',', fmt='%.4e', header='T(C),Gi(Pa),tau(s)')
     
-    fig.get_layout_engine().set(wspace=0, w_pad=0, hspace=0, h_pad=0.01)
+    fig.get_layout_engine().set(wspace=0, w_pad=0.02, hspace=0, h_pad=0.0)
     fig.align_ylabels()
     for ext in ['png', 'pdf']:
         fig.savefig(f'DLS_Y16SE6_newdata_colourblind.{ext}')
