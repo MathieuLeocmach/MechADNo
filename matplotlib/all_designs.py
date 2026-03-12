@@ -135,6 +135,18 @@ def load_DLS(rootdir, SE=6, Y=16, c=1000):
             name = f"cooling_{c+1}/Y{Y}SE{SE}-{middle_name}{c+1}_{{:03d}}.csv"
             measurements.append(load_and_sort(os.path.join(dirfile, name)))
         return np.reshape(measurements, (Ncooling-1, Ntemperature, Nrepeat))
+    elif c==400 and SE==6 and Y==32:
+        dirfile = os.path.join(rootdir, f'../DLS/Y{Y}SE{SE}_400uM/')
+        Ncooling = 1
+        Nrepeat = 5
+        Ntemperature = 36
+        middle_name = '400uM-NP500nm-0.1pct-cooling'
+        measurements = []
+        #load all measurements
+        for c in range(Ncooling):
+            name = f"cooling_{c+1}/Y{Y}SE{SE}-{middle_name}{c+1}_{{:03d}}.csv"
+            measurements.append(load_and_sort(os.path.join(dirfile, name)))
+        return np.reshape(measurements, (Ncooling, Ntemperature, Nrepeat))
     
 def contour2length(L, persistence=50):
     """Conversion from contour length to actual size of the random walk"""
@@ -237,7 +249,7 @@ marks = {16:'.', 32:'*'}
 #colors = to_rgba_array(plt.rcParams['axes.prop_cycle'].by_key()['color'])
 #SE2col = {4:colors[0], 6:colors[1], 8:colors[2]}
 
-for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), (16, 6, 500,6), (16, 6, 1000, 4), (16, 8, 1000,8), (32, 6, 500, 6)]:
+for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), (16, 6, 500,6), (16, 6, 1000, 4), (16, 8, 1000,8), (32, 6, 500, 6), (32, 6, 400, 7)]:
     measurements = load_DLS(os.path.dirname('.'), Y=Y, SE=SE, c=C_NS)
 
     #average g2 across coolings and repeats, taking count rates into account, but discarding low intercepts
@@ -284,7 +296,7 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
     pSE = CubicSpline(pSEdata['T'], pSEdata['SE+SE']/(1.5*C_NS*1e-6))
     
     T1 = mintandelta[np.where(mintandelta[:,1]<1)[0][0], 0]
-    print(f'T={T1}°C phi2rot={phi_rotating_assembled_only_crossover(pSE(T1), pNS(T1), SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=50):.3f} for Y{Y}SE{SE} at {C_NS} µM')
+    print(f'T={T1}°C phi2rot={phi_rotating_assembled_only_crossover(pSE(T1), pNS(T1), SE=SE, C_0=C_NS*1e-6, Y=Y, persistence=50):.3f} for Y{Y}SE{SE} at {C_NS/1e3:0.1f} mM')
 
     color = color_sequences['tab20c'][icolor]
     good = majority_doublet(pSE(mintandelta[:,0]))
@@ -292,7 +304,7 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
         pSE(mintandelta[good,0]),
         mintandelta[good,1],
         ls='none', marker=marks[Y], color = color,
-        label=f'Y{Y}SE{SE} {C_NS: >4d} µM'
+        label=f'Y{Y}SE{SE} {C_NS/1e3:0.1f} mM'
     )
     axs[0].plot(
         pSE(mintandelta[~good,0]),
