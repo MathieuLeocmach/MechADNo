@@ -343,7 +343,7 @@ for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), 
             
 ax0.set_ylim(0.2,50)
 axs[0].set_ylim(0.18, 8)
-axs[1].set_xlim(0,1.5)
+axs[1].set_xlim(0,1.1)
 axs[1].set_xticks(np.arange(0,1.5,0.5))
 axs[1].axvline(0.58, ls=':', color='k')
 #handles, labels = axs[0].get_legend_handles_labels()
