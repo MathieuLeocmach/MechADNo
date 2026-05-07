@@ -248,7 +248,7 @@ marks = {16:'.', 32:'*'}
 #colors = to_rgba_array(plt.rcParams['axes.prop_cycle'].by_key()['color'])
 #SE2col = {4:colors[0], 6:colors[1], 8:colors[2]}
 
-for Y, SE, C_NS, icolor in [(16, 4, 600, 2), (16, 4, 800, 1), (16, 4, 1000, 0), (16, 6, 500,6), (16, 6, 1000, 4), (16, 8, 1000,8), (32, 6, 400, 7), (32, 6, 500, 6)]:
+for Y, SE, C_NS, icolor in [(32, 6, 500, 6), (32, 6, 400, 7), (16, 8, 1000,8), (16, 6, 1000, 4), (16, 6, 500,6), (16, 4, 1000, 0), (16, 4, 800, 1), (16, 4, 600, 2)]:
     measurements = load_DLS(os.path.dirname('.'), Y=Y, SE=SE, c=C_NS)
 
     #average g2 across coolings and repeats, taking count rates into account, but discarding low intercepts
@@ -346,13 +346,13 @@ axs[0].set_ylim(0.18, 8)
 axs[1].set_xlim(0,1.1)
 axs[1].set_xticks(np.arange(0,1.5,0.5))
 axs[1].axvline(0.58, ls=':', color='k')
-#handles, labels = axs[0].get_legend_handles_labels()
+handles, labels = axs[0].get_legend_handles_labels()
 #r = plt.Rectangle((0,0), 1, 1, fill=False, edgecolor='none', visible=False)
 #handles.insert(3, r)
 #labels.insert(3,'')
 #fig.legend(handles, labels, loc='outside upper right', fontsize='small', ncols=2)
 #fig.get_layout_engine().set(wspace=0, w_pad=0)
-fig.legend(loc='outside right upper', fontsize='small')
+fig.legend(handles=handles[::-1], labels=labels[::-1], loc='outside right upper', fontsize='small')
 
 for ext in ['png', 'pdf']:
     plt.savefig(f'all_designs_A-SE.{ext}')
