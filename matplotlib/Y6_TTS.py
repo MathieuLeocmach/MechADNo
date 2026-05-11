@@ -251,7 +251,7 @@ print(f'E_a = {EA/1e3} kJ/mol')
 ax2.plot(Ts, np.exp(A + EA/const.convert_temperature(Ts, 'C', 'K')/const.R), '--k')
 
 #pSE=1 prediction of G
-C_NS = 1000 #µM to be converted to mol/m3
+C_NS = 1000*0.88 #µM to be converted to mol/m3
 ax1.plot(Ts, 0.5*C_NS * 1e-6 *1e3* const.convert_temperature(Ts, 'C', 'K')*const.R, '--k')
 
 
