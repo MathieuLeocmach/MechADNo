@@ -238,6 +238,8 @@ axs[0].set_ylabel(r'$\tan\delta_\min$')
 axs[0].set_xlabel(r'$p_\mathrm{SE}$')
 axs[1].set_xlabel(r'$\phi_\mathrm{2,rot}$')
 axs[0].set_yscale('log')
+#axs[0].axvline(0.3, ls='-', color=[0.8]*3)
+axs[0].plot(np.linspace(0.2,0.75), np.exp((0.5-np.linspace(0.2,0.75))*4), color='k')
 #axs[1].set_xscale('log')
 for ax, label in zip([ax0, ax1, ax2], 'abc'):
     #ax.axhspan(1, 100, ls='none', color=[0.9]*3+[1])
@@ -303,16 +305,10 @@ for Y, SE, C_NS, icolor in [(32, 6, 500, 6), (32, 6, 400, 7), (16, 8, 1000,8), (
     color = color_sequences['tab20c'][icolor]
     good = majority_doublet(pSE(mintandelta[:,0])*0.99**SE)
     axs[0].plot(
-        pSE(mintandelta[good,0]),
-        mintandelta[good,1],
+        pSE(mintandelta[:,0]),
+        mintandelta[:,1],
         ls='none', marker=marks[Y], color = color,
         label=f'Y{Y}SE{SE} {C_NS/1e3:0.1f} mM'
-    )
-    axs[0].plot(
-        pSE(mintandelta[~good,0]),
-        mintandelta[~good,1],
-        ls='none', marker=marks[Y], color = color, mfc='none',
-        #label=f'Y{Y}SE{SE} {C_NS: >4d} µM'
     )
     if SE==8 or (SE==6 and Y==16 and C_NS==500) or (SE==4 and C_NS==600):
         continue
