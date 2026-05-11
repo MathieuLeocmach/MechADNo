@@ -239,7 +239,20 @@ axs[0].set_xlabel(r'$p_\mathrm{SE}$')
 axs[1].set_xlabel(r'$\phi_\mathrm{2,rot}$')
 axs[0].set_yscale('log')
 #axs[0].axvline(0.3, ls='-', color=[0.8]*3)
-axs[0].plot(np.linspace(0.2,0.75), np.exp((0.5-np.linspace(0.2,0.75))*4), color='k')
+#axs[0].plot(np.linspace(0.2,0.75), np.exp((0.5-np.linspace(0.2,0.75))*4), color='k')
+axs[0].annotate(
+    '', (0.75,0.5), (0.2, 4),
+    arrowprops=dict(arrowstyle="->")
+    )
+
+axs[0].annotate(
+    '', (0.05,0.6), (0.01, 2),
+    arrowprops=dict(arrowstyle="->")
+    )
+axs[0].annotate(
+    '', (0.475, 0.18), (0.05,0.6),
+    arrowprops=dict(arrowstyle="->")
+    )
 #axs[1].set_xscale('log')
 for ax, label in zip([ax0, ax1, ax2], 'abc'):
     #ax.axhspan(1, 100, ls='none', color=[0.9]*3+[1])
@@ -339,8 +352,8 @@ for Y, SE, C_NS, icolor in [(32, 6, 500, 6), (32, 6, 400, 7), (16, 8, 1000,8), (
             
 ax0.set_ylim(0.2,50)
 axs[0].set_ylim(0.18, 8)
-axs[1].set_xlim(0,1.1)
-axs[1].set_xticks(np.arange(0,1.5,0.5))
+axs[1].set_xlim(0,1)
+axs[1].set_xticks(np.arange(0,1,0.3))
 axs[1].axvline(0.58, ls=':', color='k')
 handles, labels = axs[0].get_legend_handles_labels()
 #r = plt.Rectangle((0,0), 1, 1, fill=False, edgecolor='none', visible=False)
