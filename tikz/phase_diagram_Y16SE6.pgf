@@ -23,12 +23,12 @@
     \node[BurntOrange, anchor=base west, inner xsep=5pt] at (axis cs:0,47)
       {$T_{SE}$};  
 
-	\addplot[mark=*] coordinates {(894/2028,20)};
+	\addplot[mark=*] coordinates {(0.88*894/2028,20)};
 	\addplot[mark=square] coordinates {(268/2028,25)};
 
     \draw[ultra thick, Gray, dashed]
-      (axis cs:894/2028, 0) -- (axis cs:894/2028,25)
-      to[out=90, in=0] (axis cs:894/2028/2,50.7)
+      (axis cs:0.88*894/2028, 0) -- (axis cs:0.88*894/2028,25)
+      to[out=90, in=0] (axis cs:0.88*894/2028/2,49.7)
       node[anchor=south west, inner xsep=5pt] at (axis cs:0,10) {phase separation region};
 
 	
@@ -45,8 +45,8 @@
       {$T_{NS}$};
 
     %\draw[->, ultra thick, Plum] (axis cs:1000/2028,95) -- (axis cs:1000/2028,35);
-	\draw[->, ultra thick, BurntOrange] (axis cs:1000/2028,75) -- (axis cs:1000/2028,55);
-	\draw[->, ultra thick, Plum] (axis cs:1000/2028,30) -- (axis cs:1000/2028,10);
+	\draw[->, ultra thick, BurntOrange] (axis cs:0.88*1000/2028,75) -- (axis cs:0.88*1000/2028,55);
+	\draw[->, ultra thick, Plum] (axis cs:0.88*1000/2028,30) -- (axis cs:0.88*1000/2028,10);
   \end{axis}
 	%\draw[dotted] (phasediag.north-|compressed) -- (phasediag.south-|compressed);
 
