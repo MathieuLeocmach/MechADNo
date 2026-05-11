@@ -1,5 +1,7 @@
 import numpy as np
 from scipy import constants
+from scipy.interpolate import CubicSpline
+from pandas import read_csv
 from matplotlib import pyplot as plt
 
 def contour2length(L, persistence=50):
@@ -18,13 +20,29 @@ def plot_phase_diagram(ax, Y=16, SE=6, Cdense=894):
     R = 1 + 0.332 * (Y+SE/2) #nm
     R = 0.764 + 0.332 * Y#nm
     Cov = 1/(4/3*np.pi*(contour2length(R)*1e-9)**3*1e3)/constants.Avogadro*1e6 #µM
-    print(f'Cov = {Cov:.0f} µM')
+    print(f'Reff = {contour2length(R)} nm\tCov = {Cov:.0f} µM')
     R = 0.764 + 0.332 * (Y+SE/2)#nm
     CovSE = 1/(4/3*np.pi*(contour2length(R)*1e-9)**3*1e3)/constants.Avogadro*1e6 #µM
     print(f'CovSE = {CovSE:.0f} µM')
 
     #Sticky ends
-    C_SE, T = np.loadtxt(f'../simulations/mfold_SE{SE}_concentration.tsv', skiprows=1, usecols=[0,3], unpack=True)
+    #C_SE, T = np.loadtxt(f'../simulations/mfold_SE{SE}_concentration.tsv', skiprows=1, usecols=[0,3], unpack=True)
+    Cs = np.array([
+        1,2,5,10,20,50,100,200,500,600,750,800,900,
+        1000,1200,1500,1800,2400,3000,4000
+    ])
+    C_SE = Cs / 2
+    T = np.zeros(len(Cs))
+    for i, C in enumerate(Cs):
+        pSEdata = read_csv(f'../simulations/melting_SE{SE}/A-SE{SE}_{int(np.ceil(C)):d}uM_complexes_concentration_melting-1.tsv', sep='\t').rename(columns={'# temperature':'T'})
+        pSE = CubicSpline(pSEdata['T'], pSEdata['A+B+A+B']/(C*0.5e-6))
+        T[i] = pSE.solve(0.5)[0]
+    np.savetxt(
+        f'../simulations/nupack_A-SE{SE}_concentration.tsv',
+        np.column_stack((T, C_SE)),
+        header='T\tC_SE', delimiter='\t'
+    )
+    
     line, = ax.plot(C_SE / 1.5 / Cov, T, label=r'$T_\mathrm{SE}$')
     imax = np.where(4/3*C_SE > Cdense)[0][0]
     TC = np.interp(Cdense, 4/3*C_SE, T)
